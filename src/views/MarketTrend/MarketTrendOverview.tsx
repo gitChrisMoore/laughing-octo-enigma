@@ -1,23 +1,25 @@
 import { useState } from "react";
+
 import { Message, getOpenAPIMessage } from "../../utils/useOpenAI";
 import { useFormik } from "formik";
-import { Competitor, parseCompetitor } from "./Competitor";
-import CompetitorList from "./CompetitorList";
+import MarketTrendList from "./MarketTrendList";
+import { MarketTrend, parseMarketTrend } from "./MarketTrend";
 
 const defaultMessages = [
   {
     role: "system",
     content:
-      "You are a helpful assistant and should respond always in valid json. " +
-      "The response should be a real, existing company. " +
-      "Each response should be its own object. " +
-      "competitor_name, industry, and specialization is a string. " +
-      "strengths, and strategies can be a list of strings. ",
+      "Imagine you are a consultant, and you are talking to your Client about different trends within a given market. " +
+      "You should only respond in valid JSON. " +
+      "Based on the industry or market, respond with a trend. " +
+      "trend should be the name of the trend as a string. " +
+      "description should be a string. " +
+      "implications, leading_companies, and opportunities should be lists of strings. ",
   },
 ] as Message[];
 
-const CompetitorOverview: React.FC = () => {
-  const [competitors, setCompetitors] = useState<Competitor[]>([]);
+const MarketTrendOverview: React.FC = () => {
+  const [marketTrends, setMarketTrends] = useState<MarketTrend[]>([]);
   const [messages, setMessages] = useState(defaultMessages);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,8 +29,8 @@ const CompetitorOverview: React.FC = () => {
     setIsLoading(true);
     try {
       const response = await getOpenAPIMessage(messagesRequest as Message[]);
-      const persona = parseCompetitor(response.content);
-      setCompetitors([...competitors, persona]);
+      const marketTrend = parseMarketTrend(response.content);
+      setMarketTrends([...marketTrends, marketTrend]);
       setMessages([...messages, response]);
     } catch (error) {
       console.log(error);
@@ -40,7 +42,7 @@ const CompetitorOverview: React.FC = () => {
 
   const formik = useFormik({
     initialValues: {
-      userInput: "Apparel",
+      userInput: "USB Cords",
     },
     onSubmit: (values) => {
       handleGetPersona(values.userInput);
@@ -54,7 +56,7 @@ const CompetitorOverview: React.FC = () => {
         <form onSubmit={formik.handleSubmit}>
           <div className="flex items-center justify-between">
             <h2 className="font-semibold text-slate-900">
-              Competitor Generator
+              Market Trend Generator
             </h2>
             <button
               type="submit"
@@ -88,9 +90,9 @@ const CompetitorOverview: React.FC = () => {
       {/* if is loading, display loading */}
       {isLoading && <div>Loading...</div>}
 
-      <CompetitorList competitors={competitors} />
+      <MarketTrendList marketTrends={marketTrends} />
     </>
   );
 };
 
-export default CompetitorOverview;
+export default MarketTrendOverview;
