@@ -4,8 +4,8 @@ const TargetMarketItem: React.FC<{ targetMarket: TargetMarket }> = ({
   targetMarket,
 }) => {
   return (
-    <div className=" ">
-      <h2>{targetMarket.description}</h2>
+    <div className="flex flex-col p-4 text-sm rounded-lg shadow-md">
+      <h2 className="mb-1 font-medium">{targetMarket.description}</h2>
       <p>
         Age Range: {targetMarket.age_range.low} - {targetMarket.age_range.high}
       </p>
