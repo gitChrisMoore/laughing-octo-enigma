@@ -53,7 +53,9 @@ const TargetMarketOverview: React.FC = () => {
       <div>
         <form onSubmit={formik.handleSubmit}>
           <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-slate-900">Persona Generator</h2>
+            <h2 className="font-semibold text-slate-900">
+              Target Market Generator
+            </h2>
             <button
               type="submit"
               className="hover:bg-blue-400 group flex items-center rounded-md bg-blue-500 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm"
