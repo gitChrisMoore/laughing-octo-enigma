@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { Message, getOpenAPIMessage } from "../../utils/useOpenAI";
 import { useFormik } from "formik";
 import { MarketingMessage, parseMarketingMessage } from "./MarketingMessage";
