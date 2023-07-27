@@ -5,7 +5,7 @@ import Button from "../../../components/Button/Button";
 import { Competitor, CompetitorSchema } from "./CompetitorSchema";
 import { competitorPrompt } from "./CompetitorPrompt";
 
-const ObstacleOverview: React.FC = () => {
+const CompetitorOverview: React.FC = () => {
   const [items, setItems] = useState<Competitor[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -95,4 +95,4 @@ const ObstacleOverview: React.FC = () => {
   );
 };
 
-export default ObstacleOverview;
+export default CompetitorOverview;

@@ -1,11 +1,13 @@
-import ObstacleOverview from "./views/Generator/Obstacle/ObstacleOverview";
+import Navbar from "./components/Navbar/Navbar";
+import Router from "./router";
 
 function App() {
   return (
     <>
-      <main className="py-6 px-4 sm:p-6 md:py-10 md:px-8">
+      <Navbar />
+      <main className="relative py-4 px-4 sm:p-6 md:py-10 md:px-8">
         <div className="max-w-xl mx-auto">
-          <ObstacleOverview />
+          <Router />
         </div>
       </main>
     </>

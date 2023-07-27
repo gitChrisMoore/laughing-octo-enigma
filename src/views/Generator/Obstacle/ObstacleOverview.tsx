@@ -55,7 +55,7 @@ const ObstacleOverview: React.FC = () => {
 
           <div className="pt-4">
             <input
-              className="w-full text-sm rounded-md py-2 px-2 ring-1 ring-slate-200 shadow-sm"
+              className="w-full text-sm rounded-md py-2 px-2 ring-1  ring-slate-200 shadow-sm"
               id="userInput"
               name="userInput"
               onChange={formik.handleChange}
@@ -68,11 +68,11 @@ const ObstacleOverview: React.FC = () => {
       {/* if is loading, display loading */}
       {isLoading && <div>Loading...</div>}
 
-      <div className=" ">
+      <div className="mt-4">
         {items.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col p-4 text-sm rounded-lg shadow-md"
+            className="flex flex-col p-4 my-4 bg-slate-100 text-sm rounded-lg shadow-md"
           >
             <h2 className="mb-1 font-medium">{item.title}</h2>
             <p>{item.description}</p>
