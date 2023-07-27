@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { NavBarRoutes } from "../../router/routes";
 
 interface Props {
   to: string;
@@ -93,21 +94,14 @@ const Navbar: React.FC = () => {
             } absolute z-[1000] rounded-lg border-none dark:bg-neutral-700`}
           >
             <div ref={divRef}>
-              <NavItem
-                onClick={toggleMenu}
-                title="Obstacles"
-                to="generator-obstacle"
-              />
-              <NavItem
-                onClick={toggleMenu}
-                title="Competitors"
-                to="generator-competitor"
-              />
-              <NavItem
-                onClick={toggleMenu}
-                title="Trends"
-                to="generator-trend"
-              />
+              {NavBarRoutes.map((route, index) => (
+                <NavItem
+                  key={index}
+                  onClick={toggleMenu}
+                  title={route.title}
+                  to={route.to}
+                />
+              ))}
             </div>
           </ul>
         </div>
