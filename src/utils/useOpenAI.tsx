@@ -1,3 +1,4 @@
+import { ChatCompletionFunctions } from "openai";
 import { openai } from "./openai";
 
 export enum ChatCompletionRequestMessageRoleEnum {
@@ -31,4 +32,37 @@ const getOpenAPIMessage = async (messages: Message[]) => {
   return response.data.choices[0].message as Message;
 };
 
-export { getOpenAPIMessage };
+const getOpenAPIMessageFunction = async (
+  messages: Message[],
+  functions: ChatCompletionFunctions[]
+) => {
+  // console log the const name and the list of messages
+  console.log("getOpenAPIMessageFunction messages: ", messages);
+
+  const response = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: messages,
+    functions: functions,
+    function_call: {
+      name: "save_market_trend",
+    },
+    temperature: 1,
+    max_tokens: 256,
+    top_p: 0.8,
+    frequency_penalty: 0.8,
+    presence_penalty: 0.8,
+  });
+
+  // if response.data.choices[0].message.content does not exist or is undefined, throw error
+  if (!response.data.choices[0].message?.function_call) {
+    throw new Error("No function_call message generated.");
+  }
+
+  // of response.data.choices[0].message?.content return it as a Message
+  return {
+    role: "assistant",
+    content: response.data.choices[0].message.function_call.arguments,
+  } as Message;
+};
+
+export { getOpenAPIMessage, getOpenAPIMessageFunction };
