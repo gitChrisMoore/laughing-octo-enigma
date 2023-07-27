@@ -34,21 +34,23 @@ const getOpenAPIMessage = async (messages: Message[]) => {
 
 const getOpenAPIMessageFunction = async (
   messages: Message[],
-  functions: ChatCompletionFunctions[]
+  functions: ChatCompletionFunctions[],
+  function_name: string
 ) => {
   // console log the const name and the list of messages
   console.log("getOpenAPIMessageFunction messages: ", messages);
+  console.log("getOpenAPIMessageFunction functions: ", functions);
 
   const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: messages,
     functions: functions,
     function_call: {
-      name: "save_market_trend",
+      name: function_name,
     },
     temperature: 1,
     max_tokens: 256,
-    top_p: 0.8,
+    top_p: 1,
     frequency_penalty: 0.8,
     presence_penalty: 0.8,
   });

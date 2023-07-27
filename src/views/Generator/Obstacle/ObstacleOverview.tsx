@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useFormik } from "formik";
+import { Obstacle, ObstacleSchema } from "./ObstacleSchema";
+import { obstaclePrompt } from "./ObstaclePrompt";
 import { Message, getOpenAPIMessageFunction } from "../../../utils/useOpenAI";
 import Button from "../../../components/Button/Button";
-import { trendPrompt } from "./TrendPrompt";
-import { Trend, TrendSchema } from "./TrendSchema";
 
-const TrendOverview: React.FC = () => {
-  const [items, setItems] = useState<Trend[]>([]);
-  const [messages, setMessages] = useState(trendPrompt.initialMessages);
+const ObstacleOverview: React.FC = () => {
+  const [items, setItems] = useState<Obstacle[]>([]);
+  const [messages, setMessages] = useState(obstaclePrompt.initialMessages);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGetPersona = async (userInput: string) => {
@@ -18,10 +18,10 @@ const TrendOverview: React.FC = () => {
     try {
       const response = await getOpenAPIMessageFunction(
         messagesRequest as Message[],
-        trendPrompt.functions,
-        trendPrompt.functions[0].name
+        obstaclePrompt.functions,
+        obstaclePrompt.functions[0].name
       );
-      const resMessage = TrendSchema.parse(JSON.parse(response.content));
+      const resMessage = ObstacleSchema.parse(JSON.parse(response.content));
       setItems([...items, resMessage]);
       setMessages([...messages, newUserMessage, response]);
     } catch (error) {
@@ -34,7 +34,7 @@ const TrendOverview: React.FC = () => {
 
   const formik = useFormik({
     initialValues: {
-      userInput: trendPrompt.initialUserInput,
+      userInput: obstaclePrompt.initialUserInput,
     },
     onSubmit: (values) => {
       handleGetPersona(values.userInput);
@@ -48,7 +48,7 @@ const TrendOverview: React.FC = () => {
         <form onSubmit={formik.handleSubmit}>
           <div className="flex items-center justify-between">
             <h2 className="font-semibold text-slate-900">
-              {trendPrompt.title}
+              {obstaclePrompt.title}
             </h2>
             <Button type="submit">Generate</Button>
           </div>
@@ -75,7 +75,7 @@ const TrendOverview: React.FC = () => {
             className="flex flex-col p-4 text-sm rounded-lg shadow-md"
           >
             <h2 className="mb-1 font-medium">{item.title}</h2>
-            <p>{item.implication}</p>
+            <p>{item.description}</p>
           </div>
         ))}
       </div>
@@ -83,4 +83,4 @@ const TrendOverview: React.FC = () => {
   );
 };
 
-export default TrendOverview;
+export default ObstacleOverview;
