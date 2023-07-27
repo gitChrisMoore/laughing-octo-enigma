@@ -3,6 +3,7 @@
 import CompetitorOverview from "../views/Generator/Competitor/CompetitorOverview";
 import ObstacleOverview from "../views/Generator/Obstacle/ObstacleOverview";
 import PersonaOverview from "../views/Generator/Persona/PersonaOverview";
+import TargetMarketOverview from "../views/Generator/TargetMarket/TargetMarketOverview";
 import TrendOverview from "../views/Generator/Trend/TrendOverview";
 
 export const routes = [
@@ -26,6 +27,11 @@ export const routes = [
     component: <PersonaOverview />,
     path: "/generator-persona",
   },
+  {
+    id: "generator-targetmarket",
+    component: <TargetMarketOverview />,
+    path: "/generator-targetmarket",
+  },
 ];
 
 export const NavBarRoutes = [
@@ -44,5 +50,9 @@ export const NavBarRoutes = [
   {
     title: "persona",
     to: "generator-persona",
+  },
+  {
+    title: "targetmarket",
+    to: "generator-targetmarket",
   },
 ];
