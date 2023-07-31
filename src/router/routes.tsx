@@ -1,5 +1,7 @@
 // import { lazy } from "react";
 
+import GenericConvo from "../views/Conversation/Generic/GenericConvo";
+import GenericConvoSSE from "../views/Conversation/Generic/GenericConvoSSE";
 import CompetitorOverview from "../views/Generator/Competitor/CompetitorOverview";
 import ObstacleOverview from "../views/Generator/Obstacle/ObstacleOverview";
 import PersonaOverview from "../views/Generator/Persona/PersonaOverview";
@@ -32,6 +34,17 @@ export const routes = [
     component: <TargetMarketOverview />,
     path: "/generator-targetmarket",
   },
+  ,
+  {
+    id: "genericconvo",
+    component: <GenericConvo />,
+    path: "/genericconvo",
+  },
+  {
+    id: "genericconvo-sse",
+    component: <GenericConvoSSE />,
+    path: "/genericconvo-sse",
+  },
 ];
 
 export const NavBarRoutes = [
@@ -54,5 +67,13 @@ export const NavBarRoutes = [
   {
     title: "targetmarket",
     to: "generator-targetmarket",
+  },
+  {
+    title: "genericconvo",
+    to: "genericconvo",
+  },
+  {
+    title: "genericconvo-sse",
+    to: "genericconvo-sse",
   },
 ];
