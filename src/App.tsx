@@ -5,8 +5,8 @@ function App() {
   return (
     <>
       <Navbar />
-      <main className="relative py-4 px-4 sm:p-6 md:py-10 md:px-8">
-        <div className="max-w-xl mx-auto">
+      <main className="relative bg-slate-200">
+        <div className="max-w-3xl mx-auto">
           <Router />
         </div>
       </main>
