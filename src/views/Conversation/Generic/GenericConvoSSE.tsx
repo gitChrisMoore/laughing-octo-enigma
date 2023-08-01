@@ -141,8 +141,9 @@ const GenericConvoSSE: React.FC = () => {
 
   return (
     <>
-      <div className="h-[calc(100vh-48px)]   justify-end  flex flex-col px-2 ">
+      <div className="h-[calc(100vh-88px)] justify-end    flex flex-col ">
         {/* top Chat */}
+
         <div className="flex flex-col overflow-auto py-2">
           {messages.map((item, index) => (
             // show one div if the message is from the user, and other for all else
@@ -179,6 +180,7 @@ const GenericConvoSSE: React.FC = () => {
             //   <p className="text-xs whitespace-pre-line">{item.content}</p>
             // </div>
           ))}
+
           <div ref={messagesEndRef}></div>
           {/* <div ref={messagesEndRef}></div> */}
           {/* <AlwaysScrollToBottom /> */}
