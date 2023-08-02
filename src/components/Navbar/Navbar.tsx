@@ -1,54 +1,20 @@
-import { useEffect, useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useRef } from "react";
 import { NavBarRoutes } from "../../router/routes";
+import NavIcon from "../Icons/NavIcon";
+import NavItem from "./NavItem";
+import IconDependabot16 from "../Icons/IconDependabot16";
 
-interface Props {
-  to: string;
-  title: string;
-  onClick?: () => void;
+interface NavbarProps {
+  isNavDrawerExpanded: boolean;
+  toggleNavDrawer: () => void;
+  toggleSideSheet: () => void;
 }
 
-const NavItem: React.FC<Props> = (props) => {
-  const { to, title, onClick } = props;
-  return (
-    <li>
-      <NavLink
-        className="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
-        to={to}
-        onClick={onClick}
-      >
-        {title}
-      </NavLink>
-    </li>
-  );
-};
-
-const NavIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      style={{ marginBottom: "2px" }}
-    >
-      <line x1="3" y1="12" x2="21" y2="12"></line>
-      <line x1="3" y1="6" x2="21" y2="6"></line>
-      <line x1="3" y1="18" x2="21" y2="18"></line>
-    </svg>
-  );
-};
-
-const Navbar: React.FC = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+const Navbar: React.FC<NavbarProps> = (props) => {
+  const { isNavDrawerExpanded, toggleNavDrawer, toggleSideSheet } = props;
 
   const toggleMenu = () => {
-    setIsExpanded(!isExpanded);
+    toggleNavDrawer();
   };
 
   const divRef = useRef<HTMLDivElement>(null);
@@ -56,13 +22,17 @@ const Navbar: React.FC = () => {
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   const toggleIsOpen = (e?: any) => {
     e.preventDefault();
-    setIsExpanded(!isExpanded);
+    toggleNavDrawer();
   };
 
   useEffect(() => {
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     const checkIfClickedOutside = (e: any) => {
-      if (isExpanded && divRef.current && !divRef.current.contains(e.target)) {
+      if (
+        isNavDrawerExpanded &&
+        divRef.current &&
+        !divRef.current.contains(e.target)
+      ) {
         toggleIsOpen(e);
       }
     };
@@ -73,10 +43,10 @@ const Navbar: React.FC = () => {
       // Cleanup the event listener
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
-  }, [isExpanded]);
+  }, [isNavDrawerExpanded]);
 
   return (
-    <nav className="sticky pr-2 top-0 h-12 z-20 flex justify-between content-center bg-slate-100 white border-b border-slate-400">
+    <nav className="sticky pr-2 top-0 h-14 z-20 flex justify-between content-center bg-slate-100 white ">
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <div className="relative" data-te-dropdown-ref>
           <button
@@ -89,9 +59,9 @@ const Navbar: React.FC = () => {
           </button>
 
           <ul
-            className={`${
-              isExpanded ? "block" : "hidden" // Use "hidden" or "block" based on the state
-            } absolute z-[1000] rounded-lg border-none dark:bg-neutral-700`}
+            className={`fixed h-[calc(100vh)] transform ease-in-out transition-all duration-300 top-0 left-0 md:max-w-sm max-w-[80%] w-full bg-white overflow-auto z-30 ${
+              isNavDrawerExpanded ? "translate-x-0" : "-translate-x-full" // Use "hidden" or "block" based on the state
+            }`}
           >
             <div ref={divRef}>
               {NavBarRoutes.map((route, index) => (
@@ -104,6 +74,16 @@ const Navbar: React.FC = () => {
               ))}
             </div>
           </ul>
+        </div>
+        <div>Hatch</div>
+        <div>
+          {" "}
+          <button
+            className="bg-violet-500 border border-slate-800 p-1 rounded-full shadow "
+            onClick={toggleSideSheet}
+          >
+            <IconDependabot16 />
+          </button>
         </div>
       </div>
     </nav>

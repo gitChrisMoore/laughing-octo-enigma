@@ -23,9 +23,9 @@ const SideSheet: React.FC<SideSheetProps> = ({ children, ...props }) => {
 
   return (
     <div
-      className={`${
-        isExpanded ? "block" : "hidden" // Use "hidden" or "block" based on the state
-      } absolute h-[calc(100vh)] right-0 max-w-xs w-full rounded-l-lg bg-slate-100 `}
+      className={`fixed h-[calc(100vh)] transform ease-in-out transition-all duration-300 top-0 right-0 md:max-w-sm max-w-[80%] w-full bg-white overflow-auto z-30 ${
+        isExpanded ? "translate-x-0" : "translate-x-full" // Use "hidden" or "block" based on the state
+      }`}
     >
       <div className="flex flex-row justify-end px-5 py-4">
         <div className="flex flex-col grow">
