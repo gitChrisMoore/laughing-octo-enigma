@@ -11,9 +11,8 @@ import IconUser from "../../../components/Icons/IconUser";
 import IconSend from "../../../components/Icons/IconSend";
 import Avatar from "../../../components/Avatar/Avatar";
 
-const CONVO_SUBMIT_API = "/api/events/strategy/market_obsticle-general";
-const CONVO_EVENTS_API =
-  "/api/events/strategy/market_obsticle-general/subscribe";
+const CONVO_SUBMIT_API = "/api/rails_conversational/";
+const CONVO_EVENTS_API = "/api/rails_conversational/subscribe";
 const FUNCNAME = "GenericConvoSSE";
 
 type GenericConvoSSEProps = {
@@ -55,6 +54,7 @@ const GenericConvoSSE: React.FC<GenericConvoSSEProps> = ({ ...props }) => {
         body: JSON.stringify({
           role: "user",
           content: userInput,
+          consumer_id: "front-end",
         }),
       });
 

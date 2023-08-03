@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { TrendEvent, TrendEventSchema } from "./TrendEventSchema";
 import JSON5 from "json5";
 
-const CONVO_EVENTS_API = "/api/events/strategy/market_obsticle-typed/subscribe";
+const CONVO_EVENTS_API = "/api/rails_functional/subscribe";
 const FUNCNAME = "GenericConvoTrendWidget";
 
 type GenericConvoTrendWidgetProps = {
