@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { TrendEvent, TrendEventSchema } from "./TrendEventSchema";
+import { Trend, TrendEventSchema, TrendSchema } from "./TrendEventSchema";
 import JSON5 from "json5";
+import { FuncMessageSchema } from "./FuncMessageSchema";
 
 const CONVO_EVENTS_API = "/api/rails_functional/subscribe";
 const FUNCNAME = "GenericConvoTrendWidget";
+const AI_SOURCE_ID = "trend_bot";
 
 type GenericConvoTrendWidgetProps = {
   eventsAPI: string;
@@ -14,7 +16,7 @@ const GenericConvoTrendWidget: React.FC<GenericConvoTrendWidgetProps> = ({
   ...props
 }) => {
   const { eventsAPI = CONVO_EVENTS_API, funcName = FUNCNAME } = props;
-  const [messages, setMessages] = useState<TrendEvent[]>([]);
+  const [messages, setMessages] = useState<Trend[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -27,11 +29,15 @@ const GenericConvoTrendWidget: React.FC<GenericConvoTrendWidgetProps> = ({
 
   const handleEvent = async (event: MessageEvent) => {
     try {
-      const resMessage = TrendEventSchema.parse(JSON5.parse(event.data));
+      const msg = FuncMessageSchema.parse(JSON5.parse(event.data));
+      if (msg.source_id !== AI_SOURCE_ID) return;
+
+      const resMessage = TrendSchema.parse(msg.payload);
       setMessages((messages) => [...messages, resMessage]);
       console.log(`component: ${funcName} status: handleEvent success`);
     } catch (error) {
       console.log(`component: ${funcName} status: handleEvent error`);
+      console.log(`component: ${funcName} msg: ${event.data}`);
       console.log(error);
     }
   };
