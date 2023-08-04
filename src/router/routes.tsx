@@ -8,6 +8,8 @@ import ObstacleOverview from "../views/Generator/Obstacle/ObstacleOverview";
 import PersonaOverview from "../views/Generator/Persona/PersonaOverview";
 import TargetMarketOverview from "../views/Generator/TargetMarket/TargetMarketOverview";
 import TrendOverview from "../views/Generator/Trend/TrendOverview";
+import ProblemSolverCreate from "../views/ProblemSolvers/ProblemSolverCreate";
+import ProblemSolverOverview from "../views/ProblemSolvers/ProblemSolverOverview";
 
 export const routes = [
   {
@@ -51,6 +53,16 @@ export const routes = [
     component: <GenericConvoOverview />,
     path: "/genericconvo-overview",
   },
+  {
+    id: "problem-solver-overview",
+    component: <ProblemSolverOverview />,
+    path: "/problem-solver-overview",
+  },
+  {
+    id: "problem-solver-overview/create",
+    component: <ProblemSolverCreate />,
+    path: "/problem-solver-overview/create",
+  },
 ];
 
 export const NavBarRoutes = [
@@ -85,5 +97,13 @@ export const NavBarRoutes = [
   {
     title: "genericconvo-overview",
     to: "genericconvo-overview",
+  },
+  {
+    title: "problem-solver-overview",
+    to: "problem-solver-overview",
+  },
+  {
+    title: "problem-solver-overview/create",
+    to: "problem-solver-overview/create",
   },
 ];

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Trend, TrendEventSchema, TrendSchema } from "./TrendEventSchema";
+import { Trend, TrendSchema } from "./TrendEventSchema";
 import JSON5 from "json5";
 import { FuncMessageSchema } from "./FuncMessageSchema";
 
