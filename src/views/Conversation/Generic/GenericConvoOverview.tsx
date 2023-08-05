@@ -4,6 +4,9 @@ import GenericConvoTrendWidget from "./GenericConvoTrendWidget";
 import SideSheet from "../../../components/SideSheet/SideSheet";
 import Navbar from "../../../components/Navbar/Navbar";
 
+const CONVO_SUBMIT_API = "/api/rails_conversational/";
+const CONVO_EVENTS_API = "/api/rails_conversational/subscribe";
+
 const GenericConvoOverview: React.FC = () => {
   const [isNavDrawerExpanded, setIsNavDrawerExpanded] = useState(false);
   const [isSideSheetOpen, setIsSideSheetOpen] = useState(false);
@@ -23,10 +26,15 @@ const GenericConvoOverview: React.FC = () => {
         isNavDrawerExpanded={isNavDrawerExpanded}
         toggleNavDrawer={toggleNavDrawer}
         toggleSideSheet={toggleSideSheet}
+        title="Hatch"
       />
       <div className="flex justify-center">
         <div className="w-full px-3 max-w-2xl ">
-          <GenericConvoSSE />
+          <GenericConvoSSE
+            submitAPI={CONVO_SUBMIT_API}
+            eventsAPI={CONVO_EVENTS_API}
+            funcName={"GenericConvoSSE"}
+          />
         </div>
       </div>
       <div>
@@ -35,7 +43,10 @@ const GenericConvoOverview: React.FC = () => {
           toggleIsExpanded={toggleSideSheet}
           title={"AI Modeled"}
         >
-          <GenericConvoTrendWidget />
+          <GenericConvoTrendWidget
+            eventsAPI={CONVO_EVENTS_API}
+            funcName={"GenericConvoTrendWidget"}
+          />
         </SideSheet>
       </div>
     </>

@@ -45,9 +45,10 @@ const FuncList: React.FC = () => {
     handleGetFuncs();
   }, []);
 
-  const headline = "Funcs";
+  const headline = "Objectives";
   const supportingText = `
-  These are your magic spells; these direct the AI to perform a specific task whenever you need it. When a function is defined, the AI will structure all of their responses to fit the specified format.
+  These are your magic spells; these direct the AI to perform a specific task whenever you need it. 
+  When a objective is defined, the AI will structure all of their responses to fit the specified format.
   `;
 
   return (
@@ -55,7 +56,7 @@ const FuncList: React.FC = () => {
       <div className="flex flex-col">
         <PageHeader headline={headline} supportingText={supportingText} />
 
-        <p className="text-base text-med mt-2 ">Existing Funcs:</p>
+        <p className="text-base mt-4 ">Objectives:</p>
         {funcs.map((item, index) => (
           <div key={index} className="py-2">
             <TwoLineListItem
@@ -65,12 +66,14 @@ const FuncList: React.FC = () => {
           </div>
         ))}
 
-        <button
-          onClick={() => navigate("/func-overview/create")}
-          className="bg-slate-500 w-full text-white rounded-full justify-center items-center"
-        >
-          <p className="m-2 text-center text-sm">Add Func </p>
-        </button>
+        <div className="mt-4">
+          <button
+            onClick={() => navigate("/func-overview/create")}
+            className="bg-slate-500 w-full text-white rounded-full justify-center items-center"
+          >
+            <p className="m-2 text-center text-sm">Add Objective</p>
+          </button>
+        </div>
       </div>
     </>
   );

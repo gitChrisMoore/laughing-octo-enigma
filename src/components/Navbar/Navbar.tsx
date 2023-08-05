@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { NavBarRoutes } from "../../router/routes";
 import NavIcon from "../Icons/NavIcon";
 import NavItem from "./NavItem";
 import IconDependabot16 from "../Icons/IconDependabot16";
@@ -8,12 +7,40 @@ interface NavbarProps {
   isNavDrawerExpanded: boolean;
   toggleNavDrawer: () => void;
   toggleSideSheet: () => void;
+  title: string;
 }
 
-const Navbar: React.FC<NavbarProps> = (props) => {
-  const { isNavDrawerExpanded, toggleNavDrawer, toggleSideSheet } = props;
+export const RoutesHatch = [
+  {
+    title: "CEO Advisor",
+    to: "/genericconvo-overview",
+  },
+];
 
-  const toggleMenu = () => {
+export const RoutesSprout = [
+  {
+    title: "Blueprints",
+    to: "/problem-solver-overview",
+  },
+
+  {
+    title: "Objectives",
+    to: "/func-overview",
+  },
+];
+
+export const RoutesAdmin = [
+  {
+    title: "admin-overview",
+    to: "/admin-overview",
+  },
+];
+
+const Navbar: React.FC<NavbarProps> = (props) => {
+  const { title, isNavDrawerExpanded, toggleNavDrawer, toggleSideSheet } =
+    props;
+
+  const toggleMenu = (e?: any) => {
     toggleNavDrawer();
   };
 
@@ -50,7 +77,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <div className="relative" data-te-dropdown-ref>
           <button
-            onClick={toggleMenu}
+            onClick={toggleIsOpen}
             className="my-auto rounded-full h-10 w-10 text-sm flex justify-center items-center /
                                     focus:bg-stone-300 focus:outline-1 focus:outline-black /
                                     hover:bg-stone-300 hover:outline hover:outline-1 hover:outline-black "
@@ -59,12 +86,31 @@ const Navbar: React.FC<NavbarProps> = (props) => {
           </button>
 
           <ul
-            className={`fixed h-[calc(100vh)] transform ease-in-out transition-all duration-300 top-0 left-0 md:max-w-sm max-w-[80%] w-full bg-white overflow-auto z-30 ${
+            className={`fixed h-[calc(100vh)] pl-4 transform ease-in-out transition-all duration-300 top-14 left-0 md:max-w-sm max-w-[80%] w-full bg-white overflow-auto z-30 ${
               isNavDrawerExpanded ? "translate-x-0" : "-translate-x-full" // Use "hidden" or "block" based on the state
             }`}
           >
+            <p className="ml-2 mt-2 font-semibold">Hatch</p>
             <div ref={divRef}>
-              {NavBarRoutes.map((route, index) => (
+              {RoutesHatch.map((route, index) => (
+                <NavItem
+                  key={index}
+                  onClick={toggleMenu}
+                  title={route.title}
+                  to={route.to}
+                />
+              ))}
+              <p className="ml-2 mt-2 font-semibold">Sprout</p>
+              {RoutesSprout.map((route, index) => (
+                <NavItem
+                  key={index}
+                  onClick={toggleMenu}
+                  title={route.title}
+                  to={route.to}
+                />
+              ))}
+              <p className="ml-2 mt-2 font-semibold">Admin</p>
+              {RoutesAdmin.map((route, index) => (
                 <NavItem
                   key={index}
                   onClick={toggleMenu}
@@ -75,7 +121,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
             </div>
           </ul>
         </div>
-        <div>Hatch</div>
+        <div>{title}</div>
         <div>
           {" "}
           <button

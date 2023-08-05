@@ -1,5 +1,6 @@
 // import { lazy } from "react";
 
+import AdminOverview from "../views/Admin/AdminOverview";
 import GenericConvo from "../views/Conversation/Generic/GenericConvo";
 import GenericConvoOverview from "../views/Conversation/Generic/GenericConvoOverview";
 import GenericConvoSSE from "../views/Conversation/Generic/GenericConvoSSE";
@@ -76,55 +77,64 @@ export const routes = [
     component: <FuncCreate />,
     path: "/func-overview/create",
   },
+  {
+    id: "admin-overview",
+    component: <AdminOverview />,
+    path: "/admin-overview",
+  },
 ];
 
 export const NavBarRoutes = [
   {
     title: "obstacle",
-    to: "generator-obstacle",
+    to: "/generator-obstacle",
   },
   {
     title: "competitor",
-    to: "generator-competitor",
+    to: "/generator-competitor",
   },
   {
     title: "trend",
-    to: "generator-trend",
+    to: "/generator-trend",
   },
   {
     title: "persona",
-    to: "generator-persona",
+    to: "/generator-persona",
   },
   {
     title: "targetmarket",
-    to: "generator-targetmarket",
+    to: "/generator-targetmarket",
   },
   {
     title: "genericconvo",
-    to: "genericconvo",
+    to: "/genericconvo",
   },
   {
     title: "genericconvo-sse",
-    to: "genericconvo-sse",
+    to: "/genericconvo-sse",
   },
   {
     title: "genericconvo-overview",
-    to: "genericconvo-overview",
+    to: "/genericconvo-overview",
   },
   {
     title: "problem-solver-overview",
-    to: "problem-solver-overview",
+    to: "/problem-solver-overview",
   },
   {
     title: "problem-solver-overview/create",
-    to: "problem-solver-overview/create",
+    to: "/problem-solver-overview/create",
   },
   {
     title: "func-overview",
-    to: "func-overview",
+    to: "/func-overview",
   },
   {
     title: "func-overview/create",
-    to: "func-overview/create",
+    to: "/func-overview/create",
+  },
+  {
+    title: "admin-overview",
+    to: "/admin-overview",
   },
 ];

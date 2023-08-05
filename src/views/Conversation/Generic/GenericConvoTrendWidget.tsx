@@ -3,8 +3,6 @@ import { Trend, TrendSchema } from "./TrendEventSchema";
 import JSON5 from "json5";
 import { FuncMessageSchema } from "./FuncMessageSchema";
 
-const CONVO_EVENTS_API = "/api/rails_functional/subscribe";
-const FUNCNAME = "GenericConvoTrendWidget";
 const AI_SOURCE_ID = "trend_bot";
 
 type GenericConvoTrendWidgetProps = {
@@ -15,7 +13,7 @@ type GenericConvoTrendWidgetProps = {
 const GenericConvoTrendWidget: React.FC<GenericConvoTrendWidgetProps> = ({
   ...props
 }) => {
-  const { eventsAPI = CONVO_EVENTS_API, funcName = FUNCNAME } = props;
+  const { eventsAPI, funcName } = props;
   const [messages, setMessages] = useState<Trend[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 

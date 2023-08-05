@@ -21,6 +21,7 @@ const FuncOverview: React.FC = () => {
         isNavDrawerExpanded={isNavDrawerExpanded}
         toggleNavDrawer={toggleNavDrawer}
         toggleSideSheet={toggleSideSheet}
+        title="Sprout"
       />
       {/* Content */}
 

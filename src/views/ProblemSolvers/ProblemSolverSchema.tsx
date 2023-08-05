@@ -14,6 +14,7 @@ export const ConversationalMessage = z.object({
 export const ProblemSolverSchema = z.object({
   id: z.number(),
   name: z.string(),
+  description: z.string(),
   sub_topic_name: z.string(),
   pub_topic_name: z.string(),
   initial_context: ConversationalMessage.array(),

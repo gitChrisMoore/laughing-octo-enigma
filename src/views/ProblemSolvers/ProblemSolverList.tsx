@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { ProblemSolver, ProblemSolverSchema } from "./ProblemSolverSchema";
-import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
-import ReactJson from "react-json-view";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import TwoLineListItem from "../../components/ListItems/TwoLineListItem";
 
@@ -49,7 +47,7 @@ const ProblemSolverList: React.FC = () => {
 
   const headline = "Blueprints";
   const supportingText = `
-  These for AI are like blueprints for a building, instructing how it should  should behave. Similar to how blueprints define the structure of a building, these configs outline the specific 'architectural' instructions for AI interactions.
+  These for AI are like blueprints for a building, instructing how it should  should behave. Similar to how blueprints define the structure of a building, these configs outline the specific instructions for AI interactions and conversations.
   `;
 
   return (
@@ -63,7 +61,7 @@ const ProblemSolverList: React.FC = () => {
           <div key={index} className="py-2">
             <TwoLineListItem
               headline={item.name}
-              supportingText={item.pub_topic_name}
+              supportingText={item.description}
             />
           </div>
         ))}

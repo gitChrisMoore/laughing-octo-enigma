@@ -11,10 +11,6 @@ import IconUser from "../../../components/Icons/IconUser";
 import IconSend from "../../../components/Icons/IconSend";
 import Avatar from "../../../components/Avatar/Avatar";
 
-const CONVO_SUBMIT_API = "/api/rails_conversational/";
-const CONVO_EVENTS_API = "/api/rails_conversational/subscribe";
-const FUNCNAME = "GenericConvoSSE";
-
 type GenericConvoSSEProps = {
   submitAPI: string;
   eventsAPI: string;
@@ -22,18 +18,10 @@ type GenericConvoSSEProps = {
 };
 
 const GenericConvoSSE: React.FC<GenericConvoSSEProps> = ({ ...props }) => {
-  const {
-    submitAPI = CONVO_SUBMIT_API,
-    eventsAPI = CONVO_EVENTS_API,
-    funcName = FUNCNAME,
-  } = props;
+  const { submitAPI, eventsAPI, funcName } = props;
   const [conversation_id, setConversation_id] = useState(uuid());
   const [messages, setMessages] = useState<GenericMessage[]>([]);
-  const [retryAttempts, setRetryAttempts] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [isSSEActive, setIsSSEActive] = useState(false);
-  const MAX_RETRY_ATTEMPTS = 3;
-  const RETRY_INTERVAL_MS = 200;
 
   const scrollToBottom = () => {
     messagesEndRef?.current?.scrollIntoView({

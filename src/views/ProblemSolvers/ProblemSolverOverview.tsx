@@ -21,20 +21,12 @@ const ProblemSolverOverview: React.FC = () => {
         isNavDrawerExpanded={isNavDrawerExpanded}
         toggleNavDrawer={toggleNavDrawer}
         toggleSideSheet={toggleSideSheet}
+        title="Sprout"
       />
       <div className="flex justify-center">
         <div className="w-full px-3 max-w-2xl ">
           <ProblemSolverList />
         </div>
-      </div>
-      <div>
-        {/* <SideSheet
-          isExpanded={isSideSheetOpen}
-          toggleIsExpanded={toggleSideSheet}
-          title={"AI Modeled"}
-        >
-          <GenericConvoTrendWidget />
-        </SideSheet> */}
       </div>
     </>
   );

@@ -15,7 +15,7 @@ interface Props {
 const TwoLineListItem: React.FC<Props> = ({ ...props }) => {
   const { headline, supportingText } = props;
 
-  const truncateText = (text: string, length = 100) => {
+  const truncateText = (text: string, length = 90) => {
     if (!text) return "";
     return text.length > length ? `${text.slice(0, length)}...` : text;
   };
