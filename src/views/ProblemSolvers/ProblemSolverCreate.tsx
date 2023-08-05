@@ -1,12 +1,47 @@
 import { useEffect, useState } from "react";
 import { ProblemSolver, ProblemSolverSchema } from "./ProblemSolverSchema";
-import { useFormik } from "formik";
+import { Field, Form, Formik, useFormik } from "formik";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
 
 const PROBLEM_SOLVERS_URI = "/api/crud_problem_solvers/";
 
-const ProblemSolverCreate: React.FC = () => {
+const initialValues = {
+  id: 8,
+  name: "new_problem_solver_8",
+  sub_topic_name: "strategy-market_obsticle-general",
+  pub_topic_name: "strategy-market_obsticle-typed",
+  initial_context: [
+    {
+      role: "system",
+      content:
+        "You are a helpful assistant, and responsable for coming up with personas.  Each persona should be unique.  Your job is to provide a concise and unique response. ",
+    },
+  ],
+  functions: [
+    {
+      name: "save_persona",
+      description: "parse and structure data in the form of a persona",
+      parameters: {
+        type: "object",
+        properties: {
+          name: {
+            type: "string",
+            description: "frieldy name of the persona",
+          },
+          age: {
+            type: "number",
+            description: "age of the persona",
+          },
+        },
+        required: ["name", "age"],
+      },
+    },
+  ],
+};
+
+const BlueprintCreateForm: React.FC = () => {
   const [problemSolvers, setProblemSolvers] = useState<ProblemSolver[]>([]);
   const navigate = useNavigate();
 
@@ -27,50 +62,48 @@ const ProblemSolverCreate: React.FC = () => {
     }
   };
 
-  useEffect(() => {}, []);
-
-  const formik = useFormik({
-    initialValues: {
-      id: 8,
-      name: "new_problem_solver_8",
-      sub_topic_name: "strategy-market_obsticle-general",
-      pub_topic_name: "strategy-market_obsticle-typed",
-      initial_context: [
-        {
-          role: "system",
-          content:
-            "You are a helpful assistant, and responsable for coming up with personas.  Each persona should be unique.  Your job is to provide a concise and unique response. ",
-        },
-      ],
-      functions: [
-        {
-          name: "save_persona",
-          description: "parse and structure data in the form of a persona",
-          parameters: {
-            type: "object",
-            properties: {
-              name: {
-                type: "string",
-                description: "frieldy name of the persona",
-              },
-              age: {
-                type: "number",
-                description: "age of the persona",
-              },
-            },
-            required: ["name", "age"],
-          },
-        },
-      ],
-    },
-    onSubmit: handleCreate,
-  });
-
   return (
     <>
       {/* form that has a input text field that submits to handlegetpersona */}
 
-      <div>
+      <Formik initialValues={initialValues} onSubmit={handleCreate}>
+        <Form>
+          <div className="mb-4">
+            <div className="pb-1">
+              <label htmlFor="name">Name</label>
+            </div>
+            <Field
+              className="flex flex-row w-64 text-sm rounded-md p-2 ring-1  ring-slate-200 shadow-sm"
+              name="name"
+              placeholder="Name"
+            />
+          </div>
+          <div className="mb-4">
+            <div>
+              <label htmlFor="name">Subscribe to</label>
+            </div>
+            <Field
+              className="flex flex-row w-64 text-sm rounded-md p-2 ring-1  ring-slate-200 shadow-sm"
+              name="sub_topic_name"
+              placeholder="sub_topic_name"
+            />
+          </div>
+          <div className="mb-4">
+            <div className="pb-1">
+              <label htmlFor="name">Publish to</label>
+            </div>
+            <Field
+              className="flex flex-row w-64 text-sm rounded-md p-2 ring-1  ring-slate-200 shadow-sm"
+              name="pub_topic_name"
+              placeholder="pub_topic_name"
+            />
+          </div>
+          <button className="w-full bg-slate-500 mt-2 text-white rounded-lg flex justify-center items-center">
+            <p className="m-2 text-center text-sm">Submit </p>
+          </button>
+        </Form>
+      </Formik>
+      {/* <div>
         <h1>Create Problem Solver</h1>
         <div className="flex flex-col overflow-auto py-2 text-xs">
           <form onSubmit={formik.handleSubmit}>
@@ -109,6 +142,37 @@ const ProblemSolverCreate: React.FC = () => {
 
             <Button type="submit">Create</Button>
           </form>
+        </div>
+      </div> */}
+    </>
+  );
+};
+
+const ProblemSolverCreate: React.FC = () => {
+  const [isNavDrawerExpanded, setIsNavDrawerExpanded] = useState(false);
+  const [isSideSheetOpen, setIsSideSheetOpen] = useState(false);
+
+  const toggleNavDrawer = () => {
+    setIsNavDrawerExpanded(!isNavDrawerExpanded);
+  };
+
+  const toggleSideSheet = () => {
+    setIsSideSheetOpen(!isSideSheetOpen);
+  };
+
+  return (
+    <>
+      {/* Nav */}
+      <Navbar
+        isNavDrawerExpanded={isNavDrawerExpanded}
+        toggleNavDrawer={toggleNavDrawer}
+        toggleSideSheet={toggleSideSheet}
+      />
+      {/* Content */}
+
+      <div className="flex justify-center">
+        <div className="w-full px-3 max-w-2xl ">
+          <BlueprintCreateForm />
         </div>
       </div>
     </>

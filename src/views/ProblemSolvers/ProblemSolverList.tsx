@@ -3,6 +3,8 @@ import { ProblemSolver, ProblemSolverSchema } from "./ProblemSolverSchema";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import ReactJson from "react-json-view";
+import PageHeader from "../../components/PageHeader/PageHeader";
+import TwoLineListItem from "../../components/ListItems/TwoLineListItem";
 
 const PROBLEM_SOLVERS_URI = "/api/crud_problem_solvers/";
 
@@ -45,50 +47,33 @@ const ProblemSolverList: React.FC = () => {
     handleGetProblemSolvers();
   }, []);
 
+  const headline = "Blueprints";
+  const supportingText = `
+  These for AI are like blueprints for a building, instructing how it should  should behave. Similar to how blueprints define the structure of a building, these configs outline the specific 'architectural' instructions for AI interactions.
+  `;
+
   return (
     <>
       {/* form that has a input text field that submits to handlegetpersona */}
 
-      <div>
-        <h1>Problem Solvers</h1>
-        <div>
-          <Button onClick={() => navigate("/problem-solver-overview/create")}>
-            Add New Problem Solver
-          </Button>
-        </div>
-        <div className="flex flex-col overflow-auto py-2 text-xs">
-          {problemSolvers.map((item, index) => (
-            <div key={index} className="py-2">
-              <div>
-                <p className="whitespace-pre-line">{item.name}</p>
-              </div>
+      <div className="flex flex-col">
+        <PageHeader headline={headline} supportingText={supportingText} />
+        <p className="text-base text-med mt-2 ">Existing Blueprints:</p>
+        {problemSolvers.map((item, index) => (
+          <div key={index} className="py-2">
+            <TwoLineListItem
+              headline={item.name}
+              supportingText={item.pub_topic_name}
+            />
+          </div>
+        ))}
 
-              <div>
-                <p className="whitespace-pre-line">{item.pub_topic_name}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="text-xs p-4 rounded-lg bg-slate-300">
-        {problemSolvers[0] && (
-          <ReactJson
-            src={problemSolvers[0].functions[0]}
-            name={false}
-            displayDataTypes={false}
-            onEdit={(edit) => {
-              console.log(edit);
-            }}
-            onAdd={(add) => {
-              console.log(add);
-            }}
-            // theme={"monokai"}
-            onDelete={(del) => {
-              console.log(del);
-            }}
-            enableClipboard={false}
-          />
-        )}
+        <button
+          onClick={() => navigate("/problem-solver-overview/create")}
+          className="bg-slate-500 w-full text-white rounded-full justify-center items-center"
+        >
+          <p className="m-2 text-center text-sm">Add Blueprint </p>
+        </button>
       </div>
     </>
   );

@@ -1,22 +1,10 @@
 import { useEffect, useState } from "react";
 import { Func, FuncSchema } from "./FuncSchema";
-import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
+import TwoLineListItem from "../../components/ListItems/TwoLineListItem";
+import PageHeader from "../../components/PageHeader/PageHeader";
 
 const FUNCS_URI = "/api/funcs/";
-
-// interface BasicFuncType {
-//   [key: string]: {
-//     type: string;
-//     description: string;
-//     items?:
-//       | BasicFuncType
-//       | {
-//           type: string;
-//           description: string;
-//         };
-//   };
-// }
 
 const FuncList: React.FC = () => {
   const [funcs, setFuncs] = useState<Func[]>([]);
@@ -57,30 +45,32 @@ const FuncList: React.FC = () => {
     handleGetFuncs();
   }, []);
 
+  const headline = "Funcs";
+  const supportingText = `
+  These are your magic spells; these direct the AI to perform a specific task whenever you need it. When a function is defined, the AI will structure all of their responses to fit the specified format.
+  `;
+
   return (
     <>
-      {/* form that has a input text field that submits to handlegetpersona */}
+      <div className="flex flex-col">
+        <PageHeader headline={headline} supportingText={supportingText} />
 
-      <div>
-        <h1>Problem Solvers</h1>
-        <div>
-          <Button onClick={() => navigate("/problem-solver-overview/create")}>
-            Add New Function
-          </Button>
-        </div>
-        <div className="flex flex-col overflow-auto py-2 text-xs">
-          {funcs.map((item, index) => (
-            <div key={index} className="py-2">
-              <div>
-                <p className="whitespace-pre-line">{item.name}</p>
-              </div>
+        <p className="text-base text-med mt-2 ">Existing Funcs:</p>
+        {funcs.map((item, index) => (
+          <div key={index} className="py-2">
+            <TwoLineListItem
+              headline={item.name}
+              supportingText={item.description}
+            />
+          </div>
+        ))}
 
-              <div>
-                <p className="whitespace-pre-line">{item.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <button
+          onClick={() => navigate("/func-overview/create")}
+          className="bg-slate-500 w-full text-white rounded-full justify-center items-center"
+        >
+          <p className="m-2 text-center text-sm">Add Func </p>
+        </button>
       </div>
     </>
   );
