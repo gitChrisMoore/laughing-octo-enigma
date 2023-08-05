@@ -3,12 +3,14 @@
 import GenericConvo from "../views/Conversation/Generic/GenericConvo";
 import GenericConvoOverview from "../views/Conversation/Generic/GenericConvoOverview";
 import GenericConvoSSE from "../views/Conversation/Generic/GenericConvoSSE";
+import FuncCreate from "../views/Func/FuncCreate";
+import FuncOverview from "../views/Func/FuncOverview";
 import CompetitorOverview from "../views/Generator/Competitor/CompetitorOverview";
 import ObstacleOverview from "../views/Generator/Obstacle/ObstacleOverview";
 import PersonaOverview from "../views/Generator/Persona/PersonaOverview";
 import TargetMarketOverview from "../views/Generator/TargetMarket/TargetMarketOverview";
 import TrendOverview from "../views/Generator/Trend/TrendOverview";
-import ProblemSolverFunctionOverview from "../views/ProblemSolverFunction/ProblemSolverFunctionOverview";
+
 import ProblemSolverCreate from "../views/ProblemSolvers/ProblemSolverCreate";
 import ProblemSolverOverview from "../views/ProblemSolvers/ProblemSolverOverview";
 
@@ -65,9 +67,14 @@ export const routes = [
     path: "/problem-solver-overview/create",
   },
   {
-    id: "problem-solver-function-overview",
-    component: <ProblemSolverFunctionOverview />,
-    path: "/problem-solver-function-overview",
+    id: "func-overview",
+    component: <FuncOverview />,
+    path: "/func-overview",
+  },
+  {
+    id: "func-overview/create",
+    component: <FuncCreate />,
+    path: "/func-overview/create",
   },
 ];
 
@@ -113,7 +120,11 @@ export const NavBarRoutes = [
     to: "problem-solver-overview/create",
   },
   {
-    title: "problem-solver-function-overview",
-    to: "problem-solver-function-overview",
+    title: "func-overview",
+    to: "func-overview",
+  },
+  {
+    title: "func-overview/create",
+    to: "func-overview/create",
   },
 ];

@@ -4,6 +4,7 @@ import { Field, FieldArray, Form, useFormik } from "formik";
 import * as Yup from "yup";
 import Button from "../../components/Button/Button";
 import uuid from "react-uuid";
+import IconSend from "../../components/Icons/IconSend";
 
 interface Field {
   id: string;
@@ -135,11 +136,11 @@ const ProblemSolverFunctionOverview: React.FC = () => {
   const InputFieldRecursion = ({ fields }) => {
     console.log(fields);
     return (
-      <ul>
+      <ul className="flex flex-col">
         {fields.map((field: Field, index: number) => (
-          <li className="ml-6" key={field.id}>
-            <div className="flex flex-row text-xs mt-1">
-              <div className="flex flex-col">
+          <li className="ml-5 pl-2" key={field.id}>
+            <div className="flex grow  w-full text-xs mt-1">
+              <div className="flex grow">
                 <input
                   className="w-full text-sm rounded-md py-1 px-1 ring-1 ring-slate-200 shadow-sm"
                   id={field.name}
@@ -149,22 +150,40 @@ const ProblemSolverFunctionOverview: React.FC = () => {
                   // value={field.value}
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="mx-2">
                 <select
-                  className="w-full text-sm rounded-md py-1 px-2 ring-1 ring-slate-200 shadow-sm"
+                  className=" text-sm rounded-md py-1 px-1 ring-1 ring-slate-200 shadow-sm"
                   id={field.name}
                   name={field.name}
                   placeholder="Enter a value"
                   onChange={(e) => handleChange(e.target.name, e.target.value)}
                   // value={field.value}
-                />
+                >
+                  <option>String</option>
+                  <option>Number</option>
+                  <option>Array</option>
+                </select>
               </div>
-              <div className="flex flex-col">
-                <Button>+</Button>
-              </div>
-              <div className="flex flex-col">
-                <Button>-</Button>
-              </div>
+              <button
+                onClick={() => {
+                  const newField = {
+                    id: uuid(),
+                    name: "New Field",
+                    type: "text",
+                    children: [],
+                  };
+                  handleAddChildField(field.id, newField);
+                }}
+                className=" bg-emerald-500 ml-2 text-white rounded-lg flex flex-col h-full justify-center items-center align-middle"
+              >
+                <p className="mx-2  text-center text-sm">+</p>
+              </button>
+              <button
+                onClick={() => removeField(field)}
+                className="bg-pink-500 ml-1 text-white rounded-lg flex flex-col h-full justify-center items-center align-middle"
+              >
+                <p className="mx-2  text-center text-sm">X</p>
+              </button>
             </div>
             {field.children && <InputFieldRecursion fields={field.children} />}
           </li>
@@ -175,41 +194,23 @@ const ProblemSolverFunctionOverview: React.FC = () => {
 
   return (
     <>
-      {fields.map((field, index) => (
-        <div className="flex w-full" key={index}>
-          <div className="pt-4">
-            {field.name}
-            <input
-              className="w-full text-sm rounded-md py-2 px-2 ring-1 ring-slate-200 shadow-sm"
-              id={field.name}
-              name={field.name}
-              onChange={(e) => handleChange(e.target.name, e.target.value)}
-              // value={field.value}
-            />
-          </div>
-
-          <button onClick={() => removeField(field)}>Remove</button>
-          <button
-            onClick={() => {
-              const newChildField = {
-                id: uuid(),
-                name: "abcd",
-                type: "text",
-                children: [],
-              };
-              // field.children.push(newChildField);
-              handleAddChildField(field.id, newChildField);
-
-              // setFields(fields);
-            }}
-          >
-            Add Child Field
-          </button>
+      <div className="w-screen max-w-md mx-auto px-2">
+        {/* <Menu data={fields} /> */}
+        <div className="flex flex-col mx-auto ">
+          <InputFieldRecursion fields={fields} />
         </div>
-      ))}
-      <button onClick={addField}>Add Field</button>
-      {/* <Menu data={fields} /> */}
-      <InputFieldRecursion fields={fields} />
+
+        <button
+          onClick={addField}
+          className="bg-slate-500 mt-2 text-white rounded-lg flex justify-center items-center"
+        >
+          <p className="m-2 text-center text-sm">+ Field </p>
+        </button>
+
+        <div className="mt-4 text-xs bg-slate-200 rounded-lg p-2">
+          <pre>{JSON.stringify(fields, null, 2)}</pre>
+        </div>
+      </div>
     </>
   );
 };
