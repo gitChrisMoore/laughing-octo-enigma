@@ -8,6 +8,7 @@ import ObstacleOverview from "../views/Generator/Obstacle/ObstacleOverview";
 import PersonaOverview from "../views/Generator/Persona/PersonaOverview";
 import TargetMarketOverview from "../views/Generator/TargetMarket/TargetMarketOverview";
 import TrendOverview from "../views/Generator/Trend/TrendOverview";
+import ProblemSolverFunctionOverview from "../views/ProblemSolverFunction/ProblemSolverFunctionOverview";
 import ProblemSolverCreate from "../views/ProblemSolvers/ProblemSolverCreate";
 import ProblemSolverOverview from "../views/ProblemSolvers/ProblemSolverOverview";
 
@@ -63,6 +64,11 @@ export const routes = [
     component: <ProblemSolverCreate />,
     path: "/problem-solver-overview/create",
   },
+  {
+    id: "problem-solver-function-overview",
+    component: <ProblemSolverFunctionOverview />,
+    path: "/problem-solver-function-overview",
+  },
 ];
 
 export const NavBarRoutes = [
@@ -105,5 +111,9 @@ export const NavBarRoutes = [
   {
     title: "problem-solver-overview/create",
     to: "problem-solver-overview/create",
+  },
+  {
+    title: "problem-solver-function-overview",
+    to: "problem-solver-function-overview",
   },
 ];
