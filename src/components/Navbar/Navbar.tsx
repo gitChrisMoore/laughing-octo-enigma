@@ -125,7 +125,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
         <div>
           {" "}
           <button
-            className="bg-violet-500 border border-slate-800 p-1 rounded-full shadow "
+            className="bg-third border border-third_on text-third_on p-2 rounded-full shadow"
             onClick={toggleSideSheet}
           >
             <IconDependabot16 />

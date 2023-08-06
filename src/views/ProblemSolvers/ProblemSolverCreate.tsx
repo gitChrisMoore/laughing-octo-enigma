@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { ProblemSolver, ProblemSolverSchema } from "./ProblemSolverSchema";
-import { Field, Form, Formik, useFormik } from "formik";
-import Button from "../../components/Button/Button";
+import { Field, Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
+import IconLayoutNavbarExpand from "../../components/Icons/IconLayoutNavbarExpand";
+import IconLayoutBottombarExpand from "../../components/Icons/IconLayoutBottombarExpand";
 
 const PROBLEM_SOLVERS_URI = "/api/crud_problem_solvers/";
 
 const initialValues = {
   id: 8,
   name: "new_problem_solver_8",
+  description: "new_problem_solver_8",
   sub_topic_name: "strategy-market_obsticle-general",
   pub_topic_name: "strategy-market_obsticle-typed",
   initial_context: [
@@ -43,6 +45,7 @@ const initialValues = {
 
 const BlueprintCreateForm: React.FC = () => {
   const [problemSolvers, setProblemSolvers] = useState<ProblemSolver[]>([]);
+  const [isAdvancedInputShown, setIsAdvancedInputShown] = useState(false);
   const navigate = useNavigate();
 
   const handleCreate = async (formInput: ProblemSolver) => {
@@ -73,36 +76,54 @@ const BlueprintCreateForm: React.FC = () => {
               <label htmlFor="name">Name</label>
             </div>
             <Field
-              className="flex flex-row w-64 text-sm rounded-md p-2 ring-1  ring-slate-200 shadow-sm"
+              className="flex flex-row w-full sm:w-80 text-sm rounded-md p-2 ring-1  ring-slate-200 shadow-sm"
               name="name"
               placeholder="Name"
             />
           </div>
-          <div className="mb-4">
-            <div>
-              <label htmlFor="name">Subscribe to</label>
-            </div>
-            <Field
-              className="flex flex-row w-64 text-sm rounded-md p-2 ring-1  ring-slate-200 shadow-sm"
-              name="sub_topic_name"
-              placeholder="sub_topic_name"
-            />
+          <div className="flex items-center  ">
+            <button
+              className=" text-secondary px-2 py-2 rounded"
+              onClick={() => setIsAdvancedInputShown(!isAdvancedInputShown)}
+            >
+              {isAdvancedInputShown ? (
+                <IconLayoutNavbarExpand />
+              ) : (
+                <IconLayoutBottombarExpand />
+              )}
+            </button>
+            {/* align text in vertical middle */}
+            <p className="inline-block align-middle">Advanced config</p>
+            {/* <p className=" ">asdasd</p> */}
           </div>
-          <div className="mb-4">
-            <div className="pb-1">
-              <label htmlFor="name">Publish to</label>
+          <div className={`${isAdvancedInputShown ? "block" : "hidden"}`}>
+            <div className="mb-4">
+              <div>
+                <label htmlFor="name">Subscribe to</label>
+              </div>
+              <Field
+                className="flex flex-row w-64 text-sm rounded-md p-2 ring-1  ring-slate-200 shadow-sm"
+                name="sub_topic_name"
+                placeholder="sub_topic_name"
+              />
             </div>
-            <Field
-              className="flex flex-row w-64 text-sm rounded-md p-2 ring-1  ring-slate-200 shadow-sm"
-              name="pub_topic_name"
-              placeholder="pub_topic_name"
-            />
+            <div className="mb-4">
+              <div className="pb-1">
+                <label htmlFor="name">Publish to</label>
+              </div>
+              <Field
+                className="flex flex-row w-64 text-sm rounded-md p-2 ring-1  ring-slate-200 shadow-sm"
+                name="pub_topic_name"
+                placeholder="pub_topic_name"
+              />
+            </div>
           </div>
           <button className="w-full bg-slate-500 mt-2 text-white rounded-lg flex justify-center items-center">
             <p className="m-2 text-center text-sm">Submit </p>
           </button>
         </Form>
       </Formik>
+
       {/* <div>
         <h1>Create Problem Solver</h1>
         <div className="flex flex-col overflow-auto py-2 text-xs">

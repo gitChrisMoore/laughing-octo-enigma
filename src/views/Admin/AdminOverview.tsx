@@ -2,7 +2,16 @@ import { useState } from "react";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Navbar from "../../components/Navbar/Navbar";
 
-const GenericConvoOverview: React.FC = () => {
+const AdminColors: React.FC = () => {
+  return (
+    <div className="mt-4">
+      <div className="bg-primary text-primary_on p-2">Primary</div>
+      <div className="bg-secondary text-secondary_on mt-1 p-2">Secondary</div>
+    </div>
+  );
+};
+
+const AdminOverview: React.FC = () => {
   const [isNavDrawerExpanded, setIsNavDrawerExpanded] = useState(false);
   const [isSideSheetOpen, setIsSideSheetOpen] = useState(false);
 
@@ -54,10 +63,11 @@ const GenericConvoOverview: React.FC = () => {
           >
             <p className="m-2 text-center text-sm">Reset Database</p>
           </button>
+          <AdminColors />
         </div>
       </div>
     </>
   );
 };
 
-export default GenericConvoOverview;
+export default AdminOverview;

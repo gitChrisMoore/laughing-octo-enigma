@@ -1,14 +1,13 @@
 function IconDependabot16() {
   return (
     <svg
-      // fill="bg-white-500"
+      fill="currentColor"
       // stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      // strokeWidth={1}
       viewBox="0 0 16 16"
-      height="1.2em"
-      width="1.2em"
+      height="1.3em"
+      width="1.3em"
       // {...props}
     >
       <path d="M5.75 7.5a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5a.75.75 0 01.75-.75zm5.25.75a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0v-1.5z" />

@@ -68,7 +68,7 @@ const ProblemSolverList: React.FC = () => {
 
         <button
           onClick={() => navigate("/problem-solver-overview/create")}
-          className="bg-slate-500 w-full text-white rounded-full justify-center items-center"
+          className="bg-primary w-full text-white rounded-full justify-center items-center"
         >
           <p className="m-2 text-center text-sm">Add Blueprint </p>
         </button>

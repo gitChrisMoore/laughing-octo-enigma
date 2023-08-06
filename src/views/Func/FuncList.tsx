@@ -69,7 +69,7 @@ const FuncList: React.FC = () => {
         <div className="mt-4">
           <button
             onClick={() => navigate("/func-overview/create")}
-            className="bg-slate-500 w-full text-white rounded-full justify-center items-center"
+            className="bg-primary w-full text-white rounded-full justify-center items-center"
           >
             <p className="m-2 text-center text-sm">Add Objective</p>
           </button>
