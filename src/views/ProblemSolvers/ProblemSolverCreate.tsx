@@ -83,6 +83,7 @@ const BlueprintCreateForm: React.FC = () => {
           </div>
           <div className="flex items-center  ">
             <button
+              type="button"
               className=" text-secondary px-2 py-2 rounded"
               onClick={() => setIsAdvancedInputShown(!isAdvancedInputShown)}
             >
@@ -188,6 +189,7 @@ const ProblemSolverCreate: React.FC = () => {
         isNavDrawerExpanded={isNavDrawerExpanded}
         toggleNavDrawer={toggleNavDrawer}
         toggleSideSheet={toggleSideSheet}
+        title="Hatch"
       />
       {/* Content */}
 

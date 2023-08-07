@@ -27,6 +27,10 @@ export const RoutesSprout = [
     title: "Objectives",
     to: "/func-overview",
   },
+  {
+    title: "Chat Messages",
+    to: "/chatmessage-overview",
+  },
 ];
 
 export const RoutesAdmin = [

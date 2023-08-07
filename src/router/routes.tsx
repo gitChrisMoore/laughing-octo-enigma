@@ -1,6 +1,7 @@
 // import { lazy } from "react";
 
 import AdminOverview from "../views/Admin/AdminOverview";
+import ChatMessageOverview from "../views/ChatMessage/ChatMessageOverview";
 import GenericConvo from "../views/Conversation/Generic/GenericConvo";
 import GenericConvoOverview from "../views/Conversation/Generic/GenericConvoOverview";
 import GenericConvoSSE from "../views/Conversation/Generic/GenericConvoSSE";
@@ -81,6 +82,11 @@ export const routes = [
     id: "admin-overview",
     component: <AdminOverview />,
     path: "/admin-overview",
+  },
+  {
+    id: "chatmessage-overview",
+    component: <ChatMessageOverview />,
+    path: "/chatmessage-overview",
   },
 ];
 
