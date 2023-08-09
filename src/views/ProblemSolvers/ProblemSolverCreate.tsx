@@ -94,7 +94,9 @@ const BlueprintCreateForm: React.FC = () => {
               )}
             </button>
             {/* align text in vertical middle */}
-            <p className="inline-block align-middle">Advanced config</p>
+            <div>
+              <p className="inline-block align-middle">Advanced config</p>
+            </div>
             {/* <p className=" ">asdasd</p> */}
           </div>
           <div className={`${isAdvancedInputShown ? "block" : "hidden"}`}>

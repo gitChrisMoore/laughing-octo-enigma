@@ -125,7 +125,7 @@ const ChatForm: React.FC<ChatFormProps> = ({ messages, onMessagesChange }) => {
         </div>
         <ul>
           {messages.map((message, index) => (
-            <li key={index}>
+            <li className="mt-2" key={index}>
               <TwoLineListItemButtons
                 headline={message.role}
                 supportingText={message.content}

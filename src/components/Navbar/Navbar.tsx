@@ -28,6 +28,10 @@ export const RoutesSprout = [
     to: "/func-overview",
   },
   {
+    title: "Objectives",
+    to: "/objective-overview",
+  },
+  {
     title: "Chat Messages",
     to: "/chatmessage-overview",
   },

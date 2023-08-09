@@ -28,13 +28,22 @@ const TwoLineListItemButtons: React.FC<Props> = ({ ...props }) => {
   return (
     <div
       onClick={handleItemClick}
-      className={`p-2 flex flex-row h-18 border-b border-gray-200 ${
+      className={`p-2 flex bg-white rounded-lg flex-row h-18 border-b border-gray-200 ${
         activeIndexItem === itemIndex ? "bg-blue-100" : ""
       }`}
     >
       <div className="flex-grow flex flex-col">
         <div className="flex flex-row justify-between">
           <p className="font-medium text-sm">{headline}</p>
+          <button // Added delete button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDeleteClick && handleDeleteClick();
+            }}
+            className=" rounded-lg text-sm bg-third_container text-third"
+          >
+            <IconCloseCircle />
+          </button>
         </div>
         {supportingText && (
           <p className="font-light text-xs whitespace-pre-line">
@@ -42,17 +51,7 @@ const TwoLineListItemButtons: React.FC<Props> = ({ ...props }) => {
           </p>
         )}
       </div>
-      <div>
-        <button // Added delete button
-          onClick={(e) => {
-            e.stopPropagation(); // Prevents click propagation to parent div
-            handleDeleteClick && handleDeleteClick();
-          }}
-          className="p-1 rounded-lg text-sm bg-third text-third_on"
-        >
-          <IconCloseCircle />
-        </button>
-      </div>
+      <div></div>
     </div>
   );
 };

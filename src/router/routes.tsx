@@ -12,6 +12,7 @@ import ObstacleOverview from "../views/Generator/Obstacle/ObstacleOverview";
 import PersonaOverview from "../views/Generator/Persona/PersonaOverview";
 import TargetMarketOverview from "../views/Generator/TargetMarket/TargetMarketOverview";
 import TrendOverview from "../views/Generator/Trend/TrendOverview";
+import ObjectiveOverview from "../views/Objective/ObjectiveOverview";
 
 import ProblemSolverCreate from "../views/ProblemSolvers/ProblemSolverCreate";
 import ProblemSolverOverview from "../views/ProblemSolvers/ProblemSolverOverview";
@@ -87,6 +88,11 @@ export const routes = [
     id: "chatmessage-overview",
     component: <ChatMessageOverview />,
     path: "/chatmessage-overview",
+  },
+  {
+    id: "objective-overview",
+    component: <ObjectiveOverview />,
+    path: "/objective-overview",
   },
 ];
 
