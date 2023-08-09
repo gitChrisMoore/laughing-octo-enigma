@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Objective } from "./ObjectiveSchema";
+import { Objective, ObjectiveFE } from "./ObjectiveSchema";
 import { useNavigate } from "react-router-dom";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import TwoLineListItem from "../../components/ListItems/TwoLineListItem";
@@ -26,23 +26,13 @@ type formValues = {
 
 const ObjectiveList: React.FC = () => {
   const { objectives, isLoading } = useGetObjectives(PROBLEM_SOLVERS_URI);
-  const [selectedItem, setSelectedItem] = useState<Objective | null>(null);
+  const [selectedItem, setSelectedItem] = useState<ObjectiveFE | null>(null);
   const [fieldArray, setFieldArray] = useState<Field[]>();
 
   const navigate = useNavigate();
 
-  const handleToFieldArray = (item: Objective) => {
-    const keysArray = Object.keys(item.parameters.properties);
-    const propertiesArray = keysArray.map((key) => ({
-      name: key,
-      type: item.parameters.properties[key].type,
-      description: item.parameters.properties[key].description,
-    }));
-    setFieldArray(propertiesArray);
-  };
-
-  const handleItemClick = (item: Objective) => {
-    handleToFieldArray(item);
+  const handleItemClick = (item: ObjectiveFE) => {
+    // handleToFieldArray(item);
     setSelectedItem(item);
   };
 
@@ -50,7 +40,7 @@ const ObjectiveList: React.FC = () => {
     setSelectedItem(null);
   };
 
-  const handleSave = (updatedItem: formValues) => {
+  const handleSave = (updatedItem: ObjectiveFE) => {
     // Save the changes to the backend
     // E.g., using Axios to make a PUT request to the API
     console.log(updatedItem);
@@ -66,7 +56,7 @@ const ObjectiveList: React.FC = () => {
     return (
       <ObjectiveDetails
         item={selectedItem}
-        fields={fieldArray}
+        // fields={fieldArray}
         onSaveObjective={handleSave}
         onExitObjective={handleItemExit}
       />

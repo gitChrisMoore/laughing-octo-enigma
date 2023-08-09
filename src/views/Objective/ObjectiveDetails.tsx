@@ -3,7 +3,7 @@ import IconChevronBack from "../../components/Icons/IconChevronBack";
 import { Field, FieldArray, FieldArrayRenderProps, Form, Formik } from "formik";
 import FormTextInput from "../../components/FormTextInput/FormTextInput";
 import ButtonBottom from "../../components/ButtonBottom/ButtonBottom";
-import { Objective } from "./ObjectiveSchema";
+import { Objective, ObjectiveFE } from "./ObjectiveSchema";
 
 // TODO:
 // - [X] Add additional types to type field
@@ -20,17 +20,10 @@ type Field = {
   description?: string;
 };
 
-type formValues = {
-  name: string;
-  description: string;
-  fields: Field[] | undefined;
-};
-
 type ObjectiveDetailsProps = {
-  item: Objective;
-  onSaveObjective: (values: formValues) => void;
+  item: ObjectiveFE;
+  onSaveObjective: (vales: ObjectiveFE) => void;
   onExitObjective: () => void;
-  fields: Field[] | undefined;
 };
 
 const FieldTypes = ["string", "number", "array"];
@@ -39,7 +32,6 @@ const ObjectiveDetails: React.FC<ObjectiveDetailsProps> = ({
   item,
   onSaveObjective,
   onExitObjective,
-  fields,
 }) => {
   return (
     <>
@@ -66,11 +58,7 @@ const ObjectiveDetails: React.FC<ObjectiveDetailsProps> = ({
           </p>
         </Accordion>
         <Formik
-          initialValues={{
-            name: item.name,
-            description: item.description,
-            fields: fields,
-          }}
+          initialValues={item}
           onSubmit={(values) => {
             onSaveObjective(values);
           }}
@@ -95,21 +83,21 @@ const ObjectiveDetails: React.FC<ObjectiveDetailsProps> = ({
                   the specified format.
                 </p>
               </Accordion>
-              <FieldArray name="fields">
+              <FieldArray name="parameters">
                 {({ push, form: { values } }: FieldArrayRenderProps) => (
                   <div>
-                    {values.fields.map((field: Field, index: number) => (
+                    {values.parameters.map((field: Field, index: number) => (
                       <div className="flex flex-row" key={index}>
                         <Field
                           className="flex flex-row w-64 text-sm rounded-md m-1 p-2 ring-1  ring-slate-200 shadow-sm"
                           // name={`fields.${index}.name`}
-                          name={`fields.${index}.name`}
+                          name={`parameters.${index}.name`}
                           placeholder="Property name"
                         />
                         <Field
                           className="flex flex-row w-32 text-sm rounded-md m-1 p-2 ring-1  ring-slate-200 shadow-sm"
                           as="select"
-                          name={`fields.${index}.type`}
+                          name={`parameters.${index}.type`}
                         >
                           <option value="">Select Type</option>
                           {FieldTypes.map((type, i) => (

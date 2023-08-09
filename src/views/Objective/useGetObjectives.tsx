@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
-import { Objective, ObjectiveSchema } from "./ObjectiveSchema";
+import {
+  Objective,
+  ObjectiveFE,
+  ObjectiveSchema,
+  parseObjectiveToObjectiveFE,
+} from "./ObjectiveSchema";
 
 const useGetObjectives = (url: string, fetchImpl = fetch) => {
-  const [objectives, setObjectives] = useState<Objective[]>([]);
+  const [objectives, setObjectives] = useState<ObjectiveFE[]>([]);
   const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Add this line
 
@@ -18,11 +23,12 @@ const useGetObjectives = (url: string, fetchImpl = fetch) => {
       });
 
       if (response.status === 200) {
-        const new_problem_solvers: Objective[] = [];
+        const new_problem_solvers: ObjectiveFE[] = [];
         const res = await response.json();
         for (let i = 0; i < res.length; i++) {
-          const objective = ObjectiveSchema.parse(res[i]);
-          new_problem_solvers.push(objective);
+          const objectiveAPI = ObjectiveSchema.parse(res[i]);
+          const objectiveFE = parseObjectiveToObjectiveFE(objectiveAPI);
+          new_problem_solvers.push(objectiveFE);
         }
 
         setObjectives(new_problem_solvers);
