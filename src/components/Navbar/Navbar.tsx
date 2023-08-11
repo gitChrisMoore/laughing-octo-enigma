@@ -22,10 +22,9 @@ export const RoutesSprout = [
     title: "Blueprints",
     to: "/problem-solver-overview",
   },
-
   {
-    title: "Objectives",
-    to: "/func-overview",
+    title: "Blueprints Ovr",
+    to: "/blueprint-overview",
   },
   {
     title: "Objectives",

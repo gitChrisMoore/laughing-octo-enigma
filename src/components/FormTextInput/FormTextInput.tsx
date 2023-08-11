@@ -19,12 +19,12 @@ const FormTextInput: React.FC<TextInputProps> = ({ label, ...props }) => {
         {label}
       </label>
       <input
-        {...field}
-        {...props}
         id={props.name}
         className={`mt-1 p-2 w-full border text-sm rounded-md ${
           meta.touched && meta.error ? "border-red-500" : "border-gray-300"
         }`}
+        {...field}
+        {...props}
       />
       {meta.touched && meta.error ? (
         <div className="text-red-500 text-xs ">{meta.error}</div>

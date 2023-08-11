@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import Navbar from "../../components/Navbar/Navbar";
-import FuncList from "./FuncList";
+import { useState } from "react";
+import Navbar from "../../../components/Navbar/Navbar";
+import BlueprintList from "./BlueprintList";
 
-const FuncOverview: React.FC = () => {
+const BlueprintOverview: React.FC = () => {
   const [isNavDrawerExpanded, setIsNavDrawerExpanded] = useState(false);
   const [isSideSheetOpen, setIsSideSheetOpen] = useState(false);
 
@@ -16,22 +16,18 @@ const FuncOverview: React.FC = () => {
 
   return (
     <>
-      {/* Nav */}
+      {/* form that has a input text field that submits to handlegetpersona */}
       <Navbar
         isNavDrawerExpanded={isNavDrawerExpanded}
         toggleNavDrawer={toggleNavDrawer}
         toggleSideSheet={toggleSideSheet}
         title="Sprout"
       />
-      {/* Content */}
-
-      <div className="flex justify-center">
-        <div className="w-full px-3 max-w-2xl ">
-          <FuncList />
-        </div>
+      <div className="container px-2 max-w-2xl mx-auto">
+        <BlueprintList />
       </div>
     </>
   );
 };
 
-export default FuncOverview;
+export default BlueprintOverview;

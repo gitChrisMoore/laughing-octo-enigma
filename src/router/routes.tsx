@@ -5,17 +5,17 @@ import ChatMessageOverview from "../views/ChatMessage/ChatMessageOverview";
 import GenericConvo from "../views/Conversation/Generic/GenericConvo";
 import GenericConvoOverview from "../views/Conversation/Generic/GenericConvoOverview";
 import GenericConvoSSE from "../views/Conversation/Generic/GenericConvoSSE";
-import FuncCreate from "../views/Func/FuncCreate";
-import FuncOverview from "../views/Func/FuncOverview";
 import CompetitorOverview from "../views/Generator/Competitor/CompetitorOverview";
 import ObstacleOverview from "../views/Generator/Obstacle/ObstacleOverview";
 import PersonaOverview from "../views/Generator/Persona/PersonaOverview";
 import TargetMarketOverview from "../views/Generator/TargetMarket/TargetMarketOverview";
 import TrendOverview from "../views/Generator/Trend/TrendOverview";
-import ObjectiveOverview from "../views/Objective/ObjectiveOverview";
 
 import ProblemSolverCreate from "../views/ProblemSolvers/ProblemSolverCreate";
 import ProblemSolverOverview from "../views/ProblemSolvers/ProblemSolverOverview";
+// Sprout
+import ObjectiveOverview from "../views/Objective/ObjectiveOverview";
+import BlueprintOverview from "../views/Sprout/Blueprint/BlueprintOverview";
 
 export const routes = [
   {
@@ -70,16 +70,6 @@ export const routes = [
     path: "/problem-solver-overview/create",
   },
   {
-    id: "func-overview",
-    component: <FuncOverview />,
-    path: "/func-overview",
-  },
-  {
-    id: "func-overview/create",
-    component: <FuncCreate />,
-    path: "/func-overview/create",
-  },
-  {
     id: "admin-overview",
     component: <AdminOverview />,
     path: "/admin-overview",
@@ -94,59 +84,9 @@ export const routes = [
     component: <ObjectiveOverview />,
     path: "/objective-overview",
   },
-];
-
-export const NavBarRoutes = [
   {
-    title: "obstacle",
-    to: "/generator-obstacle",
-  },
-  {
-    title: "competitor",
-    to: "/generator-competitor",
-  },
-  {
-    title: "trend",
-    to: "/generator-trend",
-  },
-  {
-    title: "persona",
-    to: "/generator-persona",
-  },
-  {
-    title: "targetmarket",
-    to: "/generator-targetmarket",
-  },
-  {
-    title: "genericconvo",
-    to: "/genericconvo",
-  },
-  {
-    title: "genericconvo-sse",
-    to: "/genericconvo-sse",
-  },
-  {
-    title: "genericconvo-overview",
-    to: "/genericconvo-overview",
-  },
-  {
-    title: "problem-solver-overview",
-    to: "/problem-solver-overview",
-  },
-  {
-    title: "problem-solver-overview/create",
-    to: "/problem-solver-overview/create",
-  },
-  {
-    title: "func-overview",
-    to: "/func-overview",
-  },
-  {
-    title: "func-overview/create",
-    to: "/func-overview/create",
-  },
-  {
-    title: "admin-overview",
-    to: "/admin-overview",
+    id: "blueprint-overview",
+    component: <BlueprintOverview />,
+    path: "/blueprint-overview",
   },
 ];

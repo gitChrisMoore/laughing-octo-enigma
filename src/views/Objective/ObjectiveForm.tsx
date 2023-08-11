@@ -28,7 +28,7 @@ type ObjectiveDetailsProps = {
 
 const FieldTypes = ["string", "number", "array"];
 
-const ObjectiveDetails: React.FC<ObjectiveDetailsProps> = ({
+const ObjectiveForm: React.FC<ObjectiveDetailsProps> = ({
   item,
   onSaveObjective,
   onExitObjective,
@@ -48,7 +48,7 @@ const ObjectiveDetails: React.FC<ObjectiveDetailsProps> = ({
       </div>
 
       {/* Main */}
-      <div className="overflow-auto max-h-[78vh]">
+      <div className="overflow-auto mx-2 px-2 max-h-[78vh]">
         <Accordion headline="Objective Quickstart">
           <p>
             These are your magic spells; these direct the AI to perform a
@@ -57,6 +57,7 @@ const ObjectiveDetails: React.FC<ObjectiveDetailsProps> = ({
             format.
           </p>
         </Accordion>
+
         <Formik
           initialValues={item}
           onSubmit={(values) => {
@@ -75,14 +76,16 @@ const ObjectiveDetails: React.FC<ObjectiveDetailsProps> = ({
                 label="Description"
                 placeholder="Enter your username"
               />
-              <Accordion headline="Configuring parameters">
-                <p>
-                  These are your magic spells; these direct the AI to perform a
-                  specific task whenever you need it. When a objective is
-                  defined, the AI will structure all of their responses to fit
-                  the specified format.
-                </p>
-              </Accordion>
+              <div>
+                <Accordion headline="Configuring parameters">
+                  <p>
+                    These are your magic spells; these direct the AI to perform
+                    a specific task whenever you need it. When a objective is
+                    defined, the AI will structure all of their responses to fit
+                    the specified format.
+                  </p>
+                </Accordion>
+              </div>
               <FieldArray name="parameters">
                 {({ push, form: { values } }: FieldArrayRenderProps) => (
                   <div>
@@ -144,4 +147,4 @@ const ObjectiveDetails: React.FC<ObjectiveDetailsProps> = ({
   );
 };
 
-export default ObjectiveDetails;
+export default ObjectiveForm;

@@ -34,21 +34,20 @@ const TwoLineListItemButtons: React.FC<Props> = ({ ...props }) => {
     >
       <div className="flex-grow flex flex-col">
         <div className="flex flex-row justify-between">
-          <p className="font-medium text-sm">{headline}</p>
+          <p className="font-medium">{headline}</p>
           <button // Added delete button
             onClick={(e) => {
               e.stopPropagation();
               handleDeleteClick && handleDeleteClick();
             }}
-            className=" rounded-lg text-sm bg-third_container text-third"
+            className=" rounded-lg p-1 bg-third_container text-third"
           >
-            <IconCloseCircle />
+            {/* <IconCloseCircle /> */}
+            remove
           </button>
         </div>
         {supportingText && (
-          <p className="font-light text-xs whitespace-pre-line">
-            {supportingText}
-          </p>
+          <p className="font-light whitespace-pre-line">{supportingText}</p>
         )}
       </div>
       <div></div>
