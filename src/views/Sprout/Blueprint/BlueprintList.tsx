@@ -1,34 +1,38 @@
 import { useState } from "react";
 import { BlueprintView } from "./BlueprintSchema";
-import { useNavigate } from "react-router-dom";
 import PageHeader from "../../../components/PageHeader/PageHeader";
 import TwoLineListItem from "../../../components/ListItems/TwoLineListItem";
 import useBlueprints from "./useBlueprints";
 import ButtonBottom from "../../../components/ButtonBottom/ButtonBottom";
-import BlueprintFormNew from "./BlueprintFormNew";
-
-const PROBLEM_SOLVERS_URI = "/api/crud_problem_solvers/";
+import BlueprintFormNew from "./BlueprintForm";
 
 const BlueprintList: React.FC = () => {
-  const { blueprints, isLoading } = useBlueprints(PROBLEM_SOLVERS_URI);
+  const { blueprints, isLoading, getBlueprint, updateBlueprint } =
+    useBlueprints();
   const [selectedItem, setSelectedItem] = useState<BlueprintView | null>(null);
 
-  const navigate = useNavigate();
-
-  const handleItemClick = (item: BlueprintView) => {
-    // handleToFieldArray(item);
-    setSelectedItem(item);
+  const handleItemClick = async (item: BlueprintView) => {
+    const res = await getBlueprint(item.blueprint_id);
+    if (res) {
+      setSelectedItem(res);
+    } else {
+      console.log("Error getting blueprint");
+    }
   };
 
   const handleItemExit = () => {
     setSelectedItem(null);
   };
 
-  const handleSave = (updatedItem: BlueprintView) => {
+  const handleSave = async (updatedItem: BlueprintView) => {
     // Save the changes to the backend
-    // E.g., using Axios to make a PUT request to the API
     console.log(updatedItem);
-    setSelectedItem(null);
+    const res = await updateBlueprint(updatedItem);
+    if (res) {
+      setSelectedItem(null);
+    } else {
+      console.log("Error Saving Blueprint");
+    }
   };
 
   const handleCreate = () => {
@@ -46,7 +50,6 @@ const BlueprintList: React.FC = () => {
   `;
 
   if (selectedItem) {
-    console.log(selectedItem);
     return (
       <BlueprintFormNew
         item={selectedItem}
@@ -72,8 +75,8 @@ const BlueprintList: React.FC = () => {
                 onClick={() => handleItemClick(item)}
               >
                 <TwoLineListItem
-                  headline={item.name}
-                  supportingText={item.description}
+                  headline={item.blueprint_name}
+                  supportingText={item.blueprint_description}
                 />
               </div>
             ))}

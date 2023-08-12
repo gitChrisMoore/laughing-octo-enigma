@@ -1,15 +1,47 @@
 import { useState, useEffect } from "react";
 import {
-  Blueprint,
-  BlueprintSchema,
+  BlueprintModelSchema,
   BlueprintView,
+  parseToBlueprintModelSchema,
   parseToBlueprintView,
 } from "./BlueprintSchema";
 
-const useBlueprints = (url: string, fetchImpl = fetch) => {
+const BLUEPRINTS_URI = "/api/blueprints/";
+
+const useBlueprints = (url: string = BLUEPRINTS_URI, fetchImpl = fetch) => {
   const [blueprints, setBlueprints] = useState<BlueprintView[]>([]);
   const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Add this line
+
+  const getBlueprint = async (id: string) => {
+    setIsLoading(true);
+    try {
+      const response = await fetchImpl(url + `${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          crossDomain: "true",
+        },
+      });
+
+      if (response.status === 200) {
+        const res = await response.json();
+        console.log(res);
+        const blueprintAPI = BlueprintModelSchema.parse(res);
+        const blueprintView = parseToBlueprintView(blueprintAPI);
+        setStatus("handleGetProblemSolver success");
+        return blueprintView;
+      } else {
+        setStatus(
+          `handleGetProblemSolver error, status code: ${response.status}`
+        );
+      }
+    } catch (error) {
+      setStatus("handleGetProblemSolver error");
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
 
   const handleGetBlueprints = async () => {
     setIsLoading(true);
@@ -25,15 +57,15 @@ const useBlueprints = (url: string, fetchImpl = fetch) => {
       if (response.status === 200) {
         const new_problem_solvers: BlueprintView[] = [];
         const res = await response.json();
+        console.log(res);
         for (let i = 0; i < res.length; i++) {
-          const blueprintAPI = BlueprintSchema.parse(res[i]);
-          console.log(blueprintAPI);
+          const blueprintAPI = BlueprintModelSchema.parse(res[i]);
           const blueprintView = parseToBlueprintView(blueprintAPI);
           new_problem_solvers.push(blueprintView);
         }
 
         setBlueprints(new_problem_solvers);
-        console.log(new_problem_solvers);
+        // console.log(new_problem_solvers);
         setStatus("handleGetBlueprints success");
       } else {
         setStatus(`handleGetBlueprints error, status code: ${response.status}`);
@@ -45,58 +77,49 @@ const useBlueprints = (url: string, fetchImpl = fetch) => {
     setIsLoading(false);
   };
 
-  const saveBlueprint = async (newBlueprint: Blueprint) => {
-    try {
-      const response = await fetchImpl(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          crossDomain: "true",
-        },
-        body: JSON.stringify(newBlueprint),
-      });
-
-      if (response.status === 200 || response.status === 201) {
-        // Re-fetch blueprints or update the state as needed
-        handleGetBlueprints();
-      } else {
-        setStatus(`saveBlueprint error, status code: ${response.status}`);
-      }
-    } catch (error) {
-      setStatus("saveBlueprint error");
-      console.log(error);
-    }
-  };
-  const updateBlueprint = async (id: number, updatedBlueprint: Blueprint) => {
-    try {
-      const response = await fetchImpl(`${url}/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          crossDomain: "true",
-        },
-        body: JSON.stringify(updatedBlueprint),
-      });
-
-      if (response.status === 200) {
-        handleGetBlueprints(); // Re-fetch blueprints or update the state as needed
-      } else {
-        setStatus(`updateBlueprint error, status code: ${response.status}`);
-      }
-    } catch (error) {
-      setStatus("updateBlueprint error");
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     handleGetBlueprints();
   }, [url, fetchImpl]);
 
+  const updateBlueprint = async (blueprintViewToUpdate: BlueprintView) => {
+    setIsLoading(true);
+    try {
+      // Convert the BlueprintView object to the expected API format (BlueprintModel)
+      const blueprintAPI = parseToBlueprintModelSchema(blueprintViewToUpdate);
+
+      const response = await fetchImpl(url + `${blueprintAPI.blueprint_id}`, {
+        method: "PUT", // Assuming you use a PUT request to update the resource
+        headers: {
+          "Content-Type": "application/json",
+          crossDomain: "true",
+        },
+        body: JSON.stringify(blueprintAPI), // Send the BlueprintModel object as JSON
+      });
+
+      if (response.status === 200) {
+        const res = await response.json();
+        const blueprintAPI = BlueprintModelSchema.parse(res);
+        const blueprintView = parseToBlueprintView(blueprintAPI);
+        setStatus("handleUpdateBlueprint success");
+        setIsLoading(false);
+        return blueprintView;
+      } else {
+        setStatus(
+          `handleUpdateBlueprint error, status code: ${response.status}`
+        );
+      }
+    } catch (error) {
+      setStatus("handleUpdateBlueprint error");
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+
   return {
     blueprints,
     status,
-    saveBlueprint,
+    getBlueprint,
+    // saveBlueprint,
     updateBlueprint,
     isLoading, // Return results as an object
   };

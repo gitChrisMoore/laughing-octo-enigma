@@ -40,6 +40,10 @@ const ObjectiveFESchema = z.object({
 
 export type ObjectiveFE = z.infer<typeof ObjectiveFESchema>;
 
+export const ObjectiveBlueprintSubsetSchema = z.object({
+  objective_id: z.string(),
+});
+
 export function parseObjectiveToObjectiveFE(objective: Objective): ObjectiveFE {
   const parameters = Object.entries(objective.parameters.properties).map(
     ([name, value]) => {
