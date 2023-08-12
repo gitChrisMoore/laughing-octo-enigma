@@ -1,13 +1,10 @@
 import { useState } from "react";
-import GenericConvoSSE from "./GenericConvoSSE";
-import GenericConvoTrendWidget from "./GenericConvoTrendWidget";
 import SideSheet from "../../../components/SideSheet/SideSheet";
 import Navbar from "../../../components/Navbar/Navbar";
+import RailsConversation from "../ConvoFramework/RailsConversation";
+import RailsFunctional from "../ConvoFramework/RailsFunctional";
 
-const CONVO_SUBMIT_API = "/api/rails_conversational/";
-const CONVO_EVENTS_API = "/api/rails_conversational/subscribe";
-
-const GenericConvoOverview: React.FC = () => {
+const AdvisorCEO: React.FC = () => {
   const [isNavDrawerExpanded, setIsNavDrawerExpanded] = useState(false);
   const [isSideSheetOpen, setIsSideSheetOpen] = useState(false);
 
@@ -28,13 +25,9 @@ const GenericConvoOverview: React.FC = () => {
         toggleSideSheet={toggleSideSheet}
         title="Hatch"
       />
-      <div className="flex justify-center">
+      <div className="h-[calc(100vh-56px)] flex justify-center">
         <div className="w-full px-3 max-w-2xl ">
-          <GenericConvoSSE
-            submitAPI={CONVO_SUBMIT_API}
-            eventsAPI={CONVO_EVENTS_API}
-            funcName={"GenericConvoSSE"}
-          />
+          <RailsConversation />
         </div>
       </div>
       <div>
@@ -43,14 +36,11 @@ const GenericConvoOverview: React.FC = () => {
           toggleIsExpanded={toggleSideSheet}
           title={"AI Modeled"}
         >
-          <GenericConvoTrendWidget
-            eventsAPI={CONVO_EVENTS_API}
-            funcName={"GenericConvoTrendWidget"}
-          />
+          <RailsFunctional />
         </SideSheet>
       </div>
     </>
   );
 };
 
-export default GenericConvoOverview;
+export default AdvisorCEO;

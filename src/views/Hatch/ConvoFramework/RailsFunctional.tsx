@@ -1,19 +1,22 @@
+// ignore typescript in this file
+
 import { useEffect, useRef, useState } from "react";
-import { Trend, TrendSchema } from "./TrendEventSchema";
 import JSON5 from "json5";
-import { FuncMessageSchema } from "./FuncMessageSchema";
+import useEventSourceListener from "./useEventSourceListener";
+
+import { FuncMessageSchema } from "../Models/FuncMessageSchema";
+import { Trend, TrendSchema } from "../Models/TrendEventSchema";
+
+const TYPED_EVENTS_API = "/api/rails_functional/subscribe";
 
 const AI_SOURCE_ID = "trend_bot";
 
-type GenericConvoTrendWidgetProps = {
-  eventsAPI: string;
-  funcName: string;
-};
+// TODO:
+// - [ ] utilize conversation id
+// - [ ] fix the avatar on the individual messages
 
-const GenericConvoTrendWidget: React.FC<GenericConvoTrendWidgetProps> = ({
-  ...props
-}) => {
-  const { eventsAPI, funcName } = props;
+const RailsFunctional: React.FC = () => {
+  const funcName = "rails_functional";
   const [messages, setMessages] = useState<Trend[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -25,50 +28,41 @@ const GenericConvoTrendWidget: React.FC<GenericConvoTrendWidgetProps> = ({
     });
   };
 
-  const handleEvent = async (event: MessageEvent) => {
+  const handleEvent = (event: MessageEvent) => {
     try {
       const msg = FuncMessageSchema.parse(JSON5.parse(event.data));
-      console.log(msg.payload);
       if (msg.source_id !== AI_SOURCE_ID) return;
-
       const resMessage = TrendSchema.parse(msg.payload);
       setMessages((messages) => [...messages, resMessage]);
       console.log(`component: ${funcName} status: handleEvent success`);
     } catch (error) {
       console.log(`component: ${funcName} status: handleEvent error`);
-      console.log(`component: ${funcName} msg: ${event.data}`);
       console.log(error);
     }
   };
 
+  const { start, stop } = useEventSourceListener(
+    TYPED_EVENTS_API,
+    "",
+    () => console.log("SSE opened!"),
+    (e) => handleEvent(e),
+    (e) => console.error("Error:", e)
+  );
+
   useEffect(() => {
-    const source = new EventSource(eventsAPI);
-    source.addEventListener("open", () => {
-      console.log("GenericConvoTrendWidget SSE opened!");
-    });
-    source.addEventListener("message", (e) => {
-      handleEvent(e);
-      scrollToBottom();
-    });
-    source.addEventListener("error", (e) => {
-      console.error("Error: ", e);
-    });
+    const source = start();
 
     return () => {
-      console.log("widget closing");
-      source.close();
+      stop(source);
     };
   }, []);
 
-  // console log when a conoponent did update
   useEffect(() => {
     scrollToBottom();
-  });
+  }, [messages]);
 
   return (
     <>
-      {/* top Chat */}
-
       <div className="flex flex-col overflow-auto py-2 text-xs">
         {messages.map((item, index) => (
           <div key={index} className="py-2">
@@ -83,9 +77,8 @@ const GenericConvoTrendWidget: React.FC<GenericConvoTrendWidgetProps> = ({
         ))}
         <div ref={messagesEndRef}></div>
       </div>
-      {/* bottom footer */}
     </>
   );
 };
 
-export default GenericConvoTrendWidget;
+export default RailsFunctional;

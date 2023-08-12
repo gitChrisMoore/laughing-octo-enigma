@@ -8,7 +8,7 @@ export default function Router() {
     <Suspense fallback={<Loader />}>
       <Routes>
         {/* Auto redirect root to /home */}
-        <Route path="/" element={<Navigate to="/generator-trend" replace />} />
+        <Route path="/" element={<Navigate to="/advisor-ceo" replace />} />
         {routes.map(({ id, component, path }) => (
           <Route key={id} element={component} path={path} />
         ))}
