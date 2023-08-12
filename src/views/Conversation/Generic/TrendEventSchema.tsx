@@ -8,7 +8,7 @@ export const TrendSchema = z.object({
 export type Trend = z.infer<typeof TrendSchema>;
 
 export const TrendEventSchema = z.object({
-  source_id: z.string(),
+  source_id: z.string().optional(),
   role: z.string(),
   payload: TrendSchema,
 });

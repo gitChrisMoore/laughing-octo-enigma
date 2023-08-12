@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const GenericMessageSchema = z.object({
-  consumer_id: z.string(),
-  content: z.string(),
+  source_id: z.string(),
+  payload: z.string(),
   function_call: z.string().optional().default(""),
   role: z.string(),
 });

@@ -61,6 +61,7 @@ const GenericConvoSSE: React.FC<GenericConvoSSEProps> = ({ ...props }) => {
   const handleEvent = async (event: MessageEvent) => {
     try {
       const resMessage = GenericMessageSchema.parse(JSON5.parse(event.data));
+      console.log(resMessage);
       setMessages((messages) => [...messages, resMessage]);
       console.log(`component: ${funcName} status: handleEvent success`);
     } catch (error) {
@@ -172,7 +173,7 @@ const GenericConvoSSE: React.FC<GenericConvoSSEProps> = ({ ...props }) => {
                   )}
                 </div>
                 <div className="flex grow">
-                  <p className="text-xs whitespace-pre-line">{item.content}</p>
+                  <p className="text-xs whitespace-pre-line">{item.payload}</p>
                 </div>
               </div>
             </div>

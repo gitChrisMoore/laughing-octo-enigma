@@ -1,7 +1,7 @@
 // import { lazy } from "react";
 
 import AdminOverview from "../views/Admin/AdminOverview";
-import ChatMessageOverview from "../views/ChatMessage/ChatMessageOverview";
+// import ChatMessageOverview from "../views/ChatMessage/ChatMessageOverview";
 import GenericConvo from "../views/Conversation/Generic/GenericConvo";
 import GenericConvoOverview from "../views/Conversation/Generic/GenericConvoOverview";
 import GenericConvoSSE from "../views/Conversation/Generic/GenericConvoSSE";
@@ -14,7 +14,7 @@ import TrendOverview from "../views/Generator/Trend/TrendOverview";
 import ProblemSolverCreate from "../views/ProblemSolvers/ProblemSolverCreate";
 import ProblemSolverOverview from "../views/ProblemSolvers/ProblemSolverOverview";
 // Sprout
-import ObjectiveOverview from "../views/Objective/ObjectiveOverview";
+import ObjectiveOverview from "../views/Sprout/Objective/ObjectiveOverview";
 import BlueprintOverview from "../views/Sprout/Blueprint/BlueprintOverview";
 
 export const routes = [
@@ -49,11 +49,11 @@ export const routes = [
     component: <GenericConvo />,
     path: "/genericconvo",
   },
-  {
-    id: "genericconvo-sse",
-    component: <GenericConvoSSE />,
-    path: "/genericconvo-sse",
-  },
+  // {
+  //   id: "genericconvo-sse",
+  //   component: <GenericConvoSSE />,
+  //   path: "/genericconvo-sse",
+  // },
   {
     id: "genericconvo-overview",
     component: <GenericConvoOverview />,
@@ -74,11 +74,11 @@ export const routes = [
     component: <AdminOverview />,
     path: "/admin-overview",
   },
-  {
-    id: "chatmessage-overview",
-    component: <ChatMessageOverview />,
-    path: "/chatmessage-overview",
-  },
+  // {
+  //   id: "chatmessage-overview",
+  //   component: <ChatMessageOverview />,
+  //   path: "/chatmessage-overview",
+  // },
   {
     id: "objective-overview",
     component: <ObjectiveOverview />,

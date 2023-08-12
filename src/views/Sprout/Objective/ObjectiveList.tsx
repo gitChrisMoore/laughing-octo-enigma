@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { ObjectiveFE } from "./ObjectiveSchema";
 import { useNavigate } from "react-router-dom";
-import PageHeader from "../../components/PageHeader/PageHeader";
-import TwoLineListItem from "../../components/ListItems/TwoLineListItem";
+import PageHeader from "../../../components/PageHeader/PageHeader";
+import TwoLineListItem from "../../../components/ListItems/TwoLineListItem";
 import ObjectiveForm from "./ObjectiveForm";
 import useGetObjectives from "./useGetObjectives";
-import ButtonBottom from "../../components/ButtonBottom/ButtonBottom";
+import ButtonBottom from "../../../components/ButtonBottom/ButtonBottom";
 
 const PROBLEM_SOLVERS_URI = "/api/funcs/";
 

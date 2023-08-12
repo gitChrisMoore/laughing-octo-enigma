@@ -28,6 +28,7 @@ const GenericConvoTrendWidget: React.FC<GenericConvoTrendWidgetProps> = ({
   const handleEvent = async (event: MessageEvent) => {
     try {
       const msg = FuncMessageSchema.parse(JSON5.parse(event.data));
+      console.log(msg.payload);
       if (msg.source_id !== AI_SOURCE_ID) return;
 
       const resMessage = TrendSchema.parse(msg.payload);

@@ -1,7 +1,7 @@
-import { Field, FieldArray, Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import IconChevronBack from "../../../components/Icons/IconChevronBack";
 import { BlueprintView } from "./BlueprintSchema";
-import useGetObjectives from "../../Objective/useGetObjectives";
+import useGetObjectives from "../Objective/useGetObjectives";
 import ButtonBottom from "../../../components/ButtonBottom/ButtonBottom";
 import { ChatMessageView } from "./ChatMessageView";
 import { IconPlusCircle } from "../../../components/Icons/IconPlusCircle";
@@ -27,7 +27,6 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
     )
       ? true
       : false;
-    console.log(acc);
     return acc;
   }, {} as { [key: string]: boolean });
 

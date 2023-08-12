@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Navbar from "../../components/Navbar/Navbar";
-import ObjectiveCreate from "./ObjectiveCreate";
+import Navbar from "../../../components/Navbar/Navbar";
 import ObjectiveList from "./ObjectiveList";
 
 const ObjectiveOverview: React.FC = () => {

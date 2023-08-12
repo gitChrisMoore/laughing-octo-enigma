@@ -1,18 +1,9 @@
-import Accordion from "../../components/Accordion/Accordion";
-import IconChevronBack from "../../components/Icons/IconChevronBack";
+import Accordion from "../../../components/Accordion/Accordion";
+import IconChevronBack from "../../../components/Icons/IconChevronBack";
 import { Field, FieldArray, FieldArrayRenderProps, Form, Formik } from "formik";
-import FormTextInput from "../../components/FormTextInput/FormTextInput";
-import ButtonBottom from "../../components/ButtonBottom/ButtonBottom";
-import { Objective, ObjectiveFE } from "./ObjectiveSchema";
-
-// TODO:
-// - [X] Add additional types to type field
-// - [ ] Add overview to the scroll overflow
-// - [ ] Add validation to the form
-// - [ ] Allow description to be multi-line
-// - [ ] Allow each parameter to be multi-line
-// - [X] Fix Add Field button
-// - [X] Fixed the update of the object
+import FormTextInput from "../../../components/FormTextInput/FormTextInput";
+import ButtonBottom from "../../../components/ButtonBottom/ButtonBottom";
+import { ObjectiveFE } from "./ObjectiveSchema";
 
 type Field = {
   name: string;

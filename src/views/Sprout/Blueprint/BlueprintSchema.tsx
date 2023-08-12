@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ObjectiveBlueprintSubsetSchema } from "../../Objective/ObjectiveSchema";
+import { ObjectiveBlueprintSubsetSchema } from "../Objective/ObjectiveSchema";
 
 const ChatViewSchema = z.object({
   role: z.string(),
