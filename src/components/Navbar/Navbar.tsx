@@ -39,17 +39,17 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   const { title, isNavDrawerExpanded, toggleNavDrawer, toggleSideSheet } =
     props;
 
-  const toggleMenu = (e?: any) => {
+  const toggleMenu = () => {
     toggleNavDrawer();
   };
 
   const divRef = useRef<HTMLDivElement>(null);
 
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-  const toggleIsOpen = (e?: any) => {
-    e.preventDefault();
-    toggleNavDrawer();
-  };
+  // const toggleIsOpen = (e?: any) => {
+  //   e.preventDefault();
+  //   toggleNavDrawer();
+  // };
 
   useEffect(() => {
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
@@ -59,7 +59,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
         divRef.current &&
         !divRef.current.contains(e.target)
       ) {
-        toggleIsOpen(e);
+        toggleMenu();
       }
     };
 
@@ -76,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <div className="relative" data-te-dropdown-ref>
           <button
-            onClick={toggleIsOpen}
+            onClick={toggleMenu}
             className="my-auto rounded-full h-10 w-10 text-sm flex justify-center items-center /
                                     focus:bg-stone-300 focus:outline-1 focus:outline-black /
                                     hover:bg-stone-300 hover:outline hover:outline-1 hover:outline-black "

@@ -20,7 +20,7 @@ const CONVO_EVENTS_API = "/api/rails_conversational/subscribe";
 
 const RailsConversation: React.FC = () => {
   const funcName = "rails_conversational";
-  const [conversation_id, setConversation_id] = useState(uuid());
+  const [conversation_id] = useState(uuid());
   const [messages, setMessages] = useState<GenericMessage[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { handleSubmit } = usePostUserEvent(
@@ -49,7 +49,7 @@ const RailsConversation: React.FC = () => {
 
   const { start, stop } = useEventSourceListener(
     CONVO_EVENTS_API,
-    conversation_id,
+    // conversation_id,
     () => console.log("SSE opened!"),
     (e) => handleEvent(e),
     (e) => console.error("Error:", e)

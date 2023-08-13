@@ -17,7 +17,7 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
   onSave,
   onExit,
 }) => {
-  const { objectives, isLoading } = useGetObjectives();
+  const { objectives } = useGetObjectives();
   const initialObjectives = objectives.reduce((acc, objective) => {
     acc[objective.objective_id] = item.objectives?.some(
       (o) => o.objective_id === objective.objective_id

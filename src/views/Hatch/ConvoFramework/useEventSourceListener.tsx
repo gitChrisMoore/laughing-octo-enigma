@@ -1,6 +1,6 @@
 const useEventSourceListener = (
   eventsAPI: string,
-  conversation_id: string,
+  // conversation_id: string,
   onOpen?: () => void,
   onMessage?: (e: MessageEvent) => void,
   onError?: (e: Event) => void

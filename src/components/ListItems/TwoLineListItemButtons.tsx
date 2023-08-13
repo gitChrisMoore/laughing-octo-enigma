@@ -1,6 +1,3 @@
-import IconCloseCircle from "../Icons/IconCloseCircle";
-import IconDelete from "../Icons/IconDelete";
-
 interface Props {
   headline: string;
   supportingText?: string;
@@ -20,10 +17,10 @@ const TwoLineListItemButtons: React.FC<Props> = ({ ...props }) => {
     handleDeleteClick,
   } = props;
 
-  const truncateText = (text: string, length = 90) => {
-    if (!text) return "";
-    return text.length > length ? `${text.slice(0, length)}...` : text;
-  };
+  // const truncateText = (text: string, length = 90) => {
+  //   if (!text) return "";
+  //   return text.length > length ? `${text.slice(0, length)}...` : text;
+  // };
 
   return (
     <div

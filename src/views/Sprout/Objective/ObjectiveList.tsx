@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ObjectiveFE } from "./ObjectiveSchema";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import PageHeader from "../../../components/PageHeader/PageHeader";
 import TwoLineListItem from "../../../components/ListItems/TwoLineListItem";
 import ObjectiveForm from "./ObjectiveForm";
@@ -37,7 +37,7 @@ const ObjectiveList: React.FC = () => {
   const { objectives, isLoading } = useGetObjectives(PROBLEM_SOLVERS_URI);
   const [selectedItem, setSelectedItem] = useState<ObjectiveFE | null>(null);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleItemClick = (item: ObjectiveFE) => {
     // handleToFieldArray(item);

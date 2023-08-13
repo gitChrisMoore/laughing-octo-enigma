@@ -18,7 +18,8 @@ export const ChatMessageView: React.FC<ChatMessageViewProps> = ({
   onRoleClick,
   ...props
 }) => {
-  const [field, meta] = useField(props.name);
+  // const [field, meta] = useField(props.name);
+  const [field] = useField(props.name);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [rows, setRows] = useState(1);
   const lineHeight = 20;

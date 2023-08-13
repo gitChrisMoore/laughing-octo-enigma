@@ -43,7 +43,6 @@ const RailsFunctional: React.FC = () => {
 
   const { start, stop } = useEventSourceListener(
     TYPED_EVENTS_API,
-    "",
     () => console.log("SSE opened!"),
     (e) => handleEvent(e),
     (e) => console.error("Error:", e)
