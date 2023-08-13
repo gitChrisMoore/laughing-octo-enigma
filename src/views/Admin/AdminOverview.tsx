@@ -11,6 +11,29 @@ const AdminColors: React.FC = () => {
   );
 };
 
+const AdminColor: React.FC = () => {
+  const themes = ["primary", "secondary", "tertiary", "error", "background"];
+
+  return (
+    <div>
+      {themes.map((theme) => (
+        <div key={theme}>
+          <div className={`my-2 bg-${theme}`}>{theme}</div>
+          <div
+            className={`my-2 text-${theme} bg-${theme}_on`}
+          >{`${theme} on`}</div>
+          <div
+            className={`my-2 container ${theme}_container`}
+          >{`${theme} container`}</div>
+          <div
+            className={`my-2 container ${theme}_on_container`}
+          >{`${theme} on container`}</div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const AdminOverview: React.FC = () => {
   const [isNavDrawerExpanded, setIsNavDrawerExpanded] = useState(false);
   const [isSideSheetOpen, setIsSideSheetOpen] = useState(false);
@@ -64,6 +87,7 @@ const AdminOverview: React.FC = () => {
             <p className="m-2 text-center text-sm">Reset Database</p>
           </button>
           <AdminColors />
+          <AdminColor />
         </div>
       </div>
     </>

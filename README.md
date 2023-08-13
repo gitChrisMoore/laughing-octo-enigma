@@ -39,3 +39,7 @@ Blueprint
 Objective
 
 - Parameter
+
+### Cypress
+
+yarn run cypress open

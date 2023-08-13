@@ -7,7 +7,7 @@ import ObjectiveForm from "./ObjectiveForm";
 import useGetObjectives from "./useGetObjectives";
 import ButtonBottom from "../../../components/ButtonBottom/ButtonBottom";
 
-const PROBLEM_SOLVERS_URI = "/api/funcs/";
+const PROBLEM_SOLVERS_URI = "/api/objectives/";
 
 // TODO:
 // - [ ] Make handleSave persist to db
@@ -57,9 +57,9 @@ const ObjectiveList: React.FC = () => {
 
   const handleCreate = () => {
     setSelectedItem({
-      id: "",
-      name: "",
-      description: "",
+      objective_id: "",
+      objective_name: "",
+      objective_description: "",
       parameters: [],
     });
   };
@@ -86,25 +86,25 @@ const ObjectiveList: React.FC = () => {
         {isLoading && <p>Loading...</p> ? (
           <p>Loading...</p>
         ) : (
-          <div>
+          <ul data-test-id="objective-list">
             <p className="text-base text-med mt-2 ">Existing Objectives:</p>
             {objectives.map((item, index) => (
-              <div
+              <li
                 key={index}
                 className="py-2"
                 onClick={() => handleItemClick(item)}
               >
                 <TwoLineListItem
-                  headline={item.name}
-                  supportingText={item.description}
+                  headline={item.objective_name}
+                  supportingText={item.objective_description}
                 />
-              </div>
+              </li>
             ))}
 
             <ButtonBottom onClick={handleCreate} variant="primary">
               Create
             </ButtonBottom>
-          </div>
+          </ul>
         )}
       </div>
     </>

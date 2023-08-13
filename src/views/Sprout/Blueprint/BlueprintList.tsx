@@ -66,10 +66,10 @@ const BlueprintList: React.FC = () => {
         {isLoading && <p>Loading...</p> ? (
           <p>Loading...</p>
         ) : (
-          <div>
-            <p className="text-base text-med mt-2 ">Existing Blueprints:</p>
+          <ul data-test-id="blueprint-list">
+            <p className="text-base text-med mt-2">Existing Blueprints:</p>
             {blueprints.map((item, index) => (
-              <div
+              <li
                 key={index}
                 className="py-2"
                 onClick={() => handleItemClick(item)}
@@ -78,13 +78,13 @@ const BlueprintList: React.FC = () => {
                   headline={item.blueprint_name}
                   supportingText={item.blueprint_description}
                 />
-              </div>
+              </li>
             ))}
 
             <ButtonBottom onClick={handleCreate} variant="primary">
               Create
             </ButtonBottom>
-          </div>
+          </ul>
         )}
       </div>
     </>

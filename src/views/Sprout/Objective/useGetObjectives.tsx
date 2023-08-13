@@ -6,7 +6,7 @@ import {
   parseObjectiveToObjectiveFE,
 } from "./ObjectiveSchema";
 
-const OBJECTIVES_URI = "/api/funcs/";
+const OBJECTIVES_URI = "/api/objectives/";
 
 const useGetObjectives = (url: string = OBJECTIVES_URI, fetchImpl = fetch) => {
   const [objectives, setObjectives] = useState<ObjectiveFE[]>([]);

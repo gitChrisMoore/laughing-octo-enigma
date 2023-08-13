@@ -13,26 +13,18 @@ interface NavbarProps {
 export const RoutesHatch = [
   {
     title: "CEO Advisor",
-    to: "/genericconvo-overview",
+    to: "/advisor-ceo",
   },
 ];
 
 export const RoutesSprout = [
   {
     title: "Blueprints",
-    to: "/problem-solver-overview",
-  },
-  {
-    title: "Blueprints Ovr",
     to: "/blueprint-overview",
   },
   {
     title: "Objectives",
     to: "/objective-overview",
-  },
-  {
-    title: "Chat Messages",
-    to: "/chatmessage-overview",
   },
 ];
 

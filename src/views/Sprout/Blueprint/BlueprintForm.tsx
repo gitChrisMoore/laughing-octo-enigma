@@ -19,11 +19,8 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
 }) => {
   const { objectives, isLoading } = useGetObjectives();
   const initialObjectives = objectives.reduce((acc, objective) => {
-    // item.objectives is an array of objectives objects, each with a objective_id property
-    // acc is an object with the objective_id as the key and a boolean as the value
-    // The boolean indicates whether the objective is selected
-    acc[objective.id] = item.objectives?.some(
-      (o) => o.objective_id === objective.id
+    acc[objective.objective_id] = item.objectives?.some(
+      (o) => o.objective_id === objective.objective_id
     )
       ? true
       : false;
@@ -40,12 +37,7 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
           initialValues={{ ...item, objectives: initialObjectives }}
           enableReinitialize
           onSubmit={(values) => {
-            // Filter the selected objectives and join them with a comma
             const { objectives, ...otherValues } = values;
-
-            // Get the keys of the objectives that are selected
-            // Add them to a array of objectives that will be used in the submission
-            // the array of objectives should be ObjectiveBlueprintSubsetSchema
             const selectedObjectives = Object.keys(objectives).filter(
               (key) => objectives[key]
             );
@@ -69,11 +61,16 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
               {/*  */}
               <div className="flex flex-col border-b border-slate-300">
                 <p className="py-4 text-lg font-semibold">Properties</p>
-                <ChatMessageView label="name" name="blueprint_name" />
+                <ChatMessageView
+                  label="name"
+                  name="blueprint_name"
+                  data-test-id="blueprint_name"
+                />
                 <ChatMessageView
                   label="Description"
                   name="blueprint_description"
                   minRows={5}
+                  data-test-id="blueprint_description"
                 />
               </div>
               {/*  */}
@@ -147,16 +144,20 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
                 {/* Objectives */}
                 <div className="flex flex-col border-b border-slate-300">
                   <p className="py-4 text-lg font-semibold">Objectives</p>
-                  <div className="px-2 flex flex-col border-b border-slate-300 overflow-y-auto max-h-[40vh]">
+                  <ul
+                    className="px-2 flex flex-col border-b border-slate-300 overflow-y-auto max-h-[40vh]"
+                    data-test-id="objective_list"
+                  >
                     {objectives?.map((objective) => (
-                      <div
-                        key={objective.id}
+                      <li
+                        key={objective.objective_id}
                         className="container bg-white px-2 py-3"
                         onClick={() => {
                           const currentValue =
-                            values.objectives?.[objective.id] ?? false;
+                            values.objectives?.[objective.objective_id] ??
+                            false;
                           setFieldValue(
-                            `objectives.${objective.id}`,
+                            `objectives.${objective.objective_id}`,
                             !currentValue
                           );
                         }}
@@ -165,35 +166,39 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
                           <Field
                             className="mx-4"
                             type="checkbox"
-                            name={`objectives.${objective.id}`}
+                            name={`objectives.${objective.objective_id}`}
                             onChange={(e: { target: { checked: any } }) => {
                               setFieldValue(
-                                `objectives.${objective.id}`,
+                                `objectives.${objective.objective_id}`,
                                 e.target.checked
                               );
                             }}
                           />
                           <div className="flex flex-col py-2 justify-between ">
                             <p className="text-xs tracking-wider font-bold text-slate-900 cursor-pointer">
-                              {objective.name.toUpperCase()}
+                              {objective.objective_name.toUpperCase()}
                             </p>
 
                             {/* <label key={objective.id} className="flex items-center"> */}
                             <div className="text-sm flex flex-col font-light text-slate-700">
-                              {objective.description}
+                              {objective.objective_description}
                             </div>
                           </div>
                         </div>
                         {/* </label> */}
-                      </div>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               </div>
               <div className="absolute bottom-0 left-0 w-full">
                 <div className="max-w-2xl mx-auto ">
                   <div className="mx-2">
-                    <ButtonBottom type="submit" variant="primary">
+                    <ButtonBottom
+                      type="submit"
+                      variant="primary"
+                      data-test-id="save_button"
+                    >
                       Save
                     </ButtonBottom>
                     <ButtonBottom

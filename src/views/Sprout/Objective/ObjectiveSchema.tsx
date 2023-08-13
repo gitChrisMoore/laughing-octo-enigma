@@ -14,9 +14,9 @@ const BasePropertySchema = z.record(
 );
 
 export const ObjectiveSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  description: z.string(),
+  objective_id: z.string(),
+  objective_name: z.string(),
+  objective_description: z.string(),
   parameters: z.object({
     type: z.string(),
     properties: BasePropertySchema,
@@ -32,9 +32,9 @@ const Field = z.object({
 });
 
 const ObjectiveFESchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  description: z.string(),
+  objective_id: z.string(),
+  objective_name: z.string(),
+  objective_description: z.string(),
   parameters: z.array(Field),
 });
 
@@ -56,9 +56,9 @@ export function parseObjectiveToObjectiveFE(objective: Objective): ObjectiveFE {
   );
 
   return {
-    description: objective.description,
-    id: objective.id,
-    name: objective.name,
+    objective_description: objective.objective_description,
+    objective_id: objective.objective_id,
+    objective_name: objective.objective_name,
     parameters: parameters,
   };
 }
@@ -78,9 +78,9 @@ export function parseObjectiveFEToObjective(
   });
 
   return {
-    id: objectiveFE.id,
-    name: objectiveFE.name,
-    description: objectiveFE.description,
+    objective_id: objectiveFE.objective_id,
+    objective_name: objectiveFE.objective_name,
+    objective_description: objectiveFE.objective_description,
     parameters: {
       type: "object", // Assuming 'type' is always 'object'; modify as needed
       properties: properties,
