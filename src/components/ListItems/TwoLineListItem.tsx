@@ -1,6 +1,7 @@
 interface Props {
   headline: string;
   supportingText?: string;
+  showCloseButton?: boolean;
 }
 
 // In react tailwind, create a reusable list-item copmonent.
@@ -13,19 +14,38 @@ interface Props {
 // The supporting text should take in any length string, wrap it, and truncate it with an ellipsis if it is over 100 characters.
 
 const TwoLineListItem: React.FC<Props> = ({ ...props }) => {
-  const { headline, supportingText } = props;
+  const { headline, supportingText, showCloseButton = false } = props;
 
-  const truncateText = (text: string, length = 90) => {
+  const truncateText = (text: string, length = 120) => {
     if (!text) return "";
     return text.length > length ? `${text.slice(0, length)}...` : text;
   };
 
   return (
-    <div className="py-2 px-4 pr-6 flex flex-col h-18 border-b border-gray-200">
-      <p className="font-medium text-sm">{headline}</p>
-      {supportingText && (
-        <p className="font-light text-xs">{truncateText(supportingText)}</p>
-      )}
+    <div className="container bg-white px-2 py-3">
+      {/*  */}
+      {/*  */}
+      {/* Header */}
+      <div className="flex flex-row py-2 justify-between items-center">
+        <p className="text-xs tracking-wider font-bold text-slate-900 cursor-pointer">
+          {headline.toUpperCase()}
+        </p>
+
+        {showCloseButton && (
+          <p
+            // onClick={onDelete}
+            className="text-xs tracking-wider font-bold text-slate-900 cursor-pointer"
+          >
+            X
+          </p>
+        )}
+      </div>
+      {/*  */}
+      {/*  */}
+      {/* Content */}
+      <div className="text-sm flex flex-col font-light text-slate-700">
+        {supportingText && <p className="">{truncateText(supportingText)}</p>}
+      </div>
     </div>
   );
 };

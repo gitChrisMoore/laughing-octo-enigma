@@ -37,6 +37,7 @@ const ObjectiveForm: React.FC<ObjectiveDetailsProps> = ({
       </div>
     );
   }
+
   return (
     <>
       {header()}
@@ -73,9 +74,8 @@ const ObjectiveForm: React.FC<ObjectiveDetailsProps> = ({
                 <FieldArray name="parameters">
                   {({ push, form: { values } }: FieldArrayRenderProps) => (
                     <div>
-                      {/* {values.parameters.map((field: Field, index: number) => ( */}
-                      {values.parameters.map((index: number) => (
-                        <div className="flex flex-row" key={index}>
+                      {values.parameters.map((item: any, index: number) => (
+                        <div className="flex flex-row" key={item.name}>
                           <Field
                             className="flex flex-row w-64 text-sm rounded-md m-1 p-2 ring-1  ring-slate-200 shadow-sm"
                             name={`parameters.${index}.name`}

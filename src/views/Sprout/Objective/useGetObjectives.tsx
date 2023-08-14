@@ -16,7 +16,6 @@ const useGetObjectives = (url: string = OBJECTIVES_URI, fetchImpl = fetch) => {
 
   const handleGetObjectives = async () => {
     setIsLoading(true);
-    console.log(url);
 
     try {
       const response = await fetchImpl(url, {
@@ -26,17 +25,11 @@ const useGetObjectives = (url: string = OBJECTIVES_URI, fetchImpl = fetch) => {
           crossDomain: "true",
         },
       });
-      // if (response) {
-
-      //   console.log(response.body);
-
-      // }
 
       if (response.status === 200) {
         const new_problem_solvers: ObjectiveFE[] = [];
         const res = await response.json();
-        console.log(response.status);
-        console.log(res);
+
         for (let i = 0; i < res.length; i++) {
           const objectiveAPI = ObjectiveSchema.parse(res[i]);
           const objectiveFE = parseObjectiveToObjectiveFE(objectiveAPI);
