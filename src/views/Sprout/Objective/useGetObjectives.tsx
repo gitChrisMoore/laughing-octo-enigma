@@ -26,6 +26,8 @@ const useGetObjectives = (url: string = OBJECTIVES_URI, fetchImpl = fetch) => {
         },
       });
 
+      console.log(response);
+
       if (response.status === 200) {
         const new_problem_solvers: ObjectiveFE[] = [];
         const res = await response.json();
