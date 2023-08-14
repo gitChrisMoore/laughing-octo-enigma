@@ -47,10 +47,11 @@ const AdminOverview: React.FC = () => {
   };
 
   const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const ADMIN_URI = VITE_API_BASE_URL + "/api/admin";
 
   const handleResetDatabase = async () => {
     try {
-      const response = await fetch("/api/admin/reset_database", {
+      const response = await fetch(ADMIN_URI + "/reset_database", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -24,7 +24,6 @@ const useGetObjectives = (url: string = OBJECTIVES_URI, fetchImpl = fetch) => {
           crossDomain: "true",
         },
       });
-
       // if (response) {
 
       //   console.log(response.body);
