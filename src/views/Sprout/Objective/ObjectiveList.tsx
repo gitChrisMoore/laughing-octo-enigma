@@ -7,8 +7,6 @@ import ObjectiveForm from "./ObjectiveForm";
 import useGetObjectives from "./useGetObjectives";
 import ButtonBottom from "../../../components/ButtonBottom/ButtonBottom";
 
-const PROBLEM_SOLVERS_URI = "/api/objectives/";
-
 // TODO:
 // - [ ] Make handleSave persist to db
 /**
@@ -34,7 +32,7 @@ const PROBLEM_SOLVERS_URI = "/api/objectives/";
  */
 
 const ObjectiveList: React.FC = () => {
-  const { objectives, isLoading } = useGetObjectives(PROBLEM_SOLVERS_URI);
+  const { objectives, isLoading } = useGetObjectives();
   const [selectedItem, setSelectedItem] = useState<ObjectiveFE | null>(null);
 
   // const navigate = useNavigate();
