@@ -16,6 +16,8 @@ const useGetObjectives = (url: string = OBJECTIVES_URI, fetchImpl = fetch) => {
 
   const handleGetObjectives = async () => {
     setIsLoading(true);
+    console.log(url);
+
     try {
       const response = await fetchImpl(url, {
         method: "GET",
