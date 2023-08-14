@@ -6,12 +6,15 @@ import {
   parseToBlueprintView,
 } from "./BlueprintSchema";
 
-const BLUEPRINTS_URI = "/api/blueprints/";
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const BLUEPRINTS_URI = VITE_API_BASE_URL + "/api/blueprints/";
 
 const useBlueprints = (url: string = BLUEPRINTS_URI, fetchImpl = fetch) => {
   const [blueprints, setBlueprints] = useState<BlueprintView[]>([]);
   const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Add this line
+
+  console.log(url);
 
   const getBlueprint = async (id: string) => {
     setIsLoading(true);

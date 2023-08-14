@@ -46,6 +46,8 @@ const AdminOverview: React.FC = () => {
     setIsSideSheetOpen(!isSideSheetOpen);
   };
 
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const handleResetDatabase = async () => {
     try {
       const response = await fetch("/api/admin/reset_database", {
@@ -86,6 +88,7 @@ const AdminOverview: React.FC = () => {
           >
             <p className="m-2 text-center text-sm">Reset Database</p>
           </button>
+          <div>VITE_API_BASE_URL: {VITE_API_BASE_URL}</div>
           <AdminColors />
           <AdminColor />
         </div>
