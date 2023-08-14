@@ -46,6 +46,7 @@ const useBlueprints = (url: string = BLUEPRINTS_URI, fetchImpl = fetch) => {
   };
 
   const handleGetBlueprints = async () => {
+    console.log(url);
     setIsLoading(true);
     try {
       const response = await fetchImpl(url, {
