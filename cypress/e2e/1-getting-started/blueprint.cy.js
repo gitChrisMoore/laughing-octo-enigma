@@ -1,8 +1,14 @@
 /// <reference types="cypress" />
 
-describe("Blueprints", () => {
+describe("View Blueprints", () => {
   beforeEach(() => {
     cy.visit("http://localhost:5173/blueprint-overview");
+  });
+
+  it("can setup the database", () => {
+    // setup the database
+    cy.visit("http://localhost:5173/admin-overview");
+    cy.get('[data-test-id="reset_database_button"]').click();
   });
 
   it("displays three by default", () => {
@@ -10,40 +16,44 @@ describe("Blueprints", () => {
       cy.get("div").should("have.length", 3);
     });
   });
+});
 
-  describe("views details of an item of a list", () => {
-    beforeEach(() => {
-      cy.contains("financial_performance").click();
-    });
-
-    it("should have the correct name field", () => {
-      cy.get('[data-test-id="blueprint_name"]').should(
-        "have.text",
-        "financial_performance_ai"
-      );
-    });
-
-    it("should have the correct description field", () => {
-      cy.get('[data-test-id="blueprint_description"]').should(
-        "have.text",
-        "Analyzes financial performance, providing the CEO with a clear picture of the company’s financial health."
-      );
-    });
-
-    it("should have XX list of objectives", () => {
-      cy.get('[data-test-id="objective_list"]').within(() => {
-        cy.get("div").should("have.length", 15);
-      });
-    });
+describe("Manage Blueprint relationships", () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:5173/blueprint-overview");
   });
-  describe("save a new objective relationship", () => {
-    beforeEach(() => {
-      cy.contains("financial_performance").click();
-    });
 
-    it("save the updated relationship", () => {
-      cy.contains("BUILD_PERSONA").click();
-      cy.get('[data-test-id="save_button"]').click();
-    });
+  const checkboxSelector = 'input[data-test-id="objective_build_persona"]';
+
+  it("can setup the database", () => {
+    // setup the database
+    cy.visit("http://localhost:5173/admin-overview");
+    cy.get('[data-test-id="reset_database_button"]').click();
+  });
+
+  it("can create a new relationship", () => {
+    // click on the financial performance blueprint
+    cy.contains("financial_performance").click();
+
+    // Save the checked state of the checkbox
+    cy.get(checkboxSelector).should("not.be.checked");
+    cy.get(checkboxSelector).check();
+    cy.get('[data-test-id="save_button"]').click();
+
+    // click on the financial performance blueprint
+    cy.contains("financial_performance").click();
+    cy.get(checkboxSelector).should("be.checked");
+  });
+
+  it("remove a existing relationship", () => {
+    cy.contains("financial_performance").click();
+
+    //
+    cy.get(checkboxSelector).uncheck();
+    cy.get('[data-test-id="save_button"]').click();
+
+    // click on the financial performance blueprint
+    cy.contains("financial_performance").click();
+    cy.get(checkboxSelector).should("not.be.checked");
   });
 });

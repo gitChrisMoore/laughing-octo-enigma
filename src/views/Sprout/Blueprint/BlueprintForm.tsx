@@ -27,6 +27,21 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
     return acc;
   }, {} as { [key: string]: boolean });
 
+  function header() {
+    return (
+      <div className="flex pb-2 items-center">
+        <button
+          type="button"
+          onClick={onExit}
+          className="rounded-full hover:bg-gray-200"
+        >
+          <IconChevronBack />
+        </button>
+        <p className="text-xl pl-3 font-semibold">Blueprint</p>
+      </div>
+    );
+  }
+
   return (
     <>
       {header()}
@@ -165,6 +180,7 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
                         <div className="text-sm flex flex-row font-light text-slate-700">
                           <Field
                             className="mx-4"
+                            data-test-id={`objective_${objective.objective_name}`}
                             type="checkbox"
                             name={`objectives.${objective.objective_id}`}
                             onChange={(e: { target: { checked: any } }) => {
@@ -219,21 +235,6 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
       </div>
     </>
   );
-
-  function header() {
-    return (
-      <div className="flex pb-2 items-center">
-        <button
-          type="button"
-          onClick={onExit}
-          className="rounded-full hover:bg-gray-200"
-        >
-          <IconChevronBack />
-        </button>
-        <p className="text-xl pl-3 font-semibold">Blueprint</p>
-      </div>
-    );
-  }
 };
 
 export default BlueprintForm;
