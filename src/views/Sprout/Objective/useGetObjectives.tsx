@@ -25,11 +25,17 @@ const useGetObjectives = (url: string = OBJECTIVES_URI, fetchImpl = fetch) => {
         },
       });
 
-      console.log(response);
+      // if (response) {
+
+      //   console.log(response.body);
+
+      // }
 
       if (response.status === 200) {
         const new_problem_solvers: ObjectiveFE[] = [];
         const res = await response.json();
+        console.log(response.status);
+        console.log(res);
         for (let i = 0; i < res.length; i++) {
           const objectiveAPI = ObjectiveSchema.parse(res[i]);
           const objectiveFE = parseObjectiveToObjectiveFE(objectiveAPI);
