@@ -24,6 +24,7 @@ const useBlueprints = (url: string = BLUEPRINTS_URI, fetchImpl = fetch) => {
         headers: {
           "Content-Type": "application/json",
           crossDomain: "true",
+          cors: "no-cors",
         },
       });
 
