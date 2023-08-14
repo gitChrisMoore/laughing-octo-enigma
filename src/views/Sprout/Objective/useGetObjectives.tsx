@@ -22,6 +22,7 @@ const useGetObjectives = (url: string = OBJECTIVES_URI, fetchImpl = fetch) => {
         headers: {
           "Content-Type": "application/json",
           crossDomain: "true",
+          cors: "no-cors",
         },
       });
 
