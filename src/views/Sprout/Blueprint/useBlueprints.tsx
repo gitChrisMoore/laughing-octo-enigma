@@ -12,9 +12,7 @@ const BLUEPRINTS_URI = VITE_API_BASE_URL + "/api/blueprints/";
 const useBlueprints = (url: string = BLUEPRINTS_URI, fetchImpl = fetch) => {
   const [blueprints, setBlueprints] = useState<BlueprintView[]>([]);
   const [status, setStatus] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // Add this line
-
-  console.log(url);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getBlueprint = async (id: string) => {
     setIsLoading(true);

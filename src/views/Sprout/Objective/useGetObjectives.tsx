@@ -6,7 +6,8 @@ import {
   parseObjectiveToObjectiveFE,
 } from "./ObjectiveSchema";
 
-const OBJECTIVES_URI = "/api/objectives/";
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const OBJECTIVES_URI = VITE_API_BASE_URL + "/api/objectives/";
 
 const useGetObjectives = (url: string = OBJECTIVES_URI, fetchImpl = fetch) => {
   const [objectives, setObjectives] = useState<ObjectiveFE[]>([]);
