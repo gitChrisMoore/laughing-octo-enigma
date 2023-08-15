@@ -5,6 +5,9 @@ import useGetObjectives from "../Objective/useGetObjectives";
 import ButtonBottom from "../../../components/ButtonBottom/ButtonBottom";
 import { ChatMessageView } from "./ChatMessageView";
 import { IconPlusCircle } from "../../../components/Icons/IconPlusCircle";
+import { FooterContentCard } from "../../../components/FooterContentCard/FooterContentCard";
+import MainTemplate from "../../MainTemplate";
+import { MainContentCard } from "../../../components/MainContentCard/MainContentCard";
 
 type BlueprintFormProps = {
   item: BlueprintView;
@@ -44,10 +47,9 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
 
   return (
     <>
-      {header()}
+      <MainTemplate>
+        {header()}
 
-      {/* Main */}
-      <div className="overflow-auto max-h-[78vh]">
         <Formik
           initialValues={{ ...item, objectives: initialObjectives }}
           enableReinitialize
@@ -70,12 +72,7 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
         >
           {({ values, setFieldValue }) => (
             <Form>
-              {/*  */}
-              {/*  */}
-              {/* Simple Header */}
-              {/*  */}
-              <div className="flex flex-col border-b border-slate-300">
-                <p className="py-4 text-lg font-semibold">Properties</p>
+              <MainContentCard header="">
                 <ChatMessageView
                   label="name"
                   name="blueprint_name"
@@ -87,15 +84,9 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
                   minRows={5}
                   data-test-id="blueprint_description"
                 />
-              </div>
-              {/*  */}
-              {/*  */}
-              {/* Initial Context Form */}
-              {/*  */}
-              <div className="flex flex-col border-b border-slate-300">
-                <p className="py-4 text-lg font-semibold">
-                  Initial Prompt Context
-                </p>
+              </MainContentCard>
+
+              <MainContentCard header="Initial Prompt Context">
                 {values.init_system_chat_messages.map((_, index) => (
                   <div key={index}>
                     <ChatMessageView
@@ -155,82 +146,72 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
                     <div className="flex flex-col">Add New Context</div>
                   </div>
                 </button>
+              </MainContentCard>
+              {/* Objectives */}
+              <MainContentCard header="Objectives">
+                <ul
+                  className="px-2 flex flex-col border-b border-slate-300 overflow-y-auto max-h-[40vh]"
+                  data-test-id="objective_list"
+                >
+                  {objectives?.map((objective) => (
+                    <li
+                      key={objective.objective_id}
+                      className="container bg-white px-2 py-3"
+                      onClick={() => {
+                        const currentValue =
+                          values.objectives?.[objective.objective_id] ?? false;
+                        setFieldValue(
+                          `objectives.${objective.objective_id}`,
+                          !currentValue
+                        );
+                      }}
+                    >
+                      <div className="text-sm flex flex-row font-light text-slate-700">
+                        <Field
+                          className="mx-4"
+                          data-test-id={`objective_${objective.objective_name}`}
+                          type="checkbox"
+                          name={`objectives.${objective.objective_id}`}
+                          onChange={(e: { target: { checked: any } }) => {
+                            setFieldValue(
+                              `objectives.${objective.objective_id}`,
+                              e.target.checked
+                            );
+                          }}
+                        />
+                        <div className="flex flex-col py-2 justify-between ">
+                          <p className="text-xs tracking-wider font-bold text-slate-900 cursor-pointer">
+                            {objective.objective_name.toUpperCase()}
+                          </p>
 
-                {/* Objectives */}
-                <div className="flex flex-col border-b border-slate-300">
-                  <p className="py-4 text-lg font-semibold">Objectives</p>
-                  <ul
-                    className="px-2 flex flex-col border-b border-slate-300 overflow-y-auto max-h-[40vh]"
-                    data-test-id="objective_list"
-                  >
-                    {objectives?.map((objective) => (
-                      <li
-                        key={objective.objective_id}
-                        className="container bg-white px-2 py-3"
-                        onClick={() => {
-                          const currentValue =
-                            values.objectives?.[objective.objective_id] ??
-                            false;
-                          setFieldValue(
-                            `objectives.${objective.objective_id}`,
-                            !currentValue
-                          );
-                        }}
-                      >
-                        <div className="text-sm flex flex-row font-light text-slate-700">
-                          <Field
-                            className="mx-4"
-                            data-test-id={`objective_${objective.objective_name}`}
-                            type="checkbox"
-                            name={`objectives.${objective.objective_id}`}
-                            onChange={(e: { target: { checked: any } }) => {
-                              setFieldValue(
-                                `objectives.${objective.objective_id}`,
-                                e.target.checked
-                              );
-                            }}
-                          />
-                          <div className="flex flex-col py-2 justify-between ">
-                            <p className="text-xs tracking-wider font-bold text-slate-900 cursor-pointer">
-                              {objective.objective_name.toUpperCase()}
-                            </p>
-
-                            {/* <label key={objective.id} className="flex items-center"> */}
-                            <div className="text-sm flex flex-col font-light text-slate-700">
-                              {objective.objective_description}
-                            </div>
+                          {/* <label key={objective.id} className="flex items-center"> */}
+                          <div className="text-sm flex flex-col font-light text-slate-700">
+                            {objective.objective_description}
                           </div>
                         </div>
-                        {/* </label> */}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="fixed bottom-0 left-0 w-full">
-                <div className="max-w-2xl mx-auto ">
-                  <div className="mx-2">
-                    <ButtonBottom
-                      type="submit"
-                      variant="primary"
-                      data-test-id="save_button"
-                    >
-                      Save
-                    </ButtonBottom>
-                    <ButtonBottom
-                      type="button"
-                      variant="secondary"
-                      onClick={onExit}
-                    >
-                      Back
-                    </ButtonBottom>
-                  </div>
-                </div>
-              </div>
+                      </div>
+                      {/* </label> */}
+                    </li>
+                  ))}
+                </ul>
+              </MainContentCard>
+
+              <FooterContentCard>
+                <ButtonBottom type="submit" variant="primary">
+                  Save
+                </ButtonBottom>
+                <ButtonBottom
+                  type="button"
+                  variant="secondary"
+                  onClick={onExit}
+                >
+                  Back
+                </ButtonBottom>
+              </FooterContentCard>
             </Form>
           )}
         </Formik>
-      </div>
+      </MainTemplate>
     </>
   );
 };

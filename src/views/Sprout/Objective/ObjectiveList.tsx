@@ -69,7 +69,11 @@ const ObjectiveList: React.FC = () => {
                 data-test-id="objective-list"
               >
                 {objectives.map((item, index) => (
-                  <li key={index} onClick={() => handleItemClick(item)}>
+                  <li
+                    key={index}
+                    data-test-id={`blueprint_${item.objective_name}`}
+                    onClick={() => handleItemClick(item)}
+                  >
                     <TwoLineListItem
                       headline={item.objective_name}
                       supportingText={item.objective_description}

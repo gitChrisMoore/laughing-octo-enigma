@@ -15,7 +15,7 @@ const ButtonBottom: React.FC<ButtonProps> = ({
       buttonClass = "bg-primary text-white";
       break;
     case "secondary":
-      buttonClass = "bg-none text-primary border border-primary";
+      buttonClass = " text-primary border border-primary";
       break;
     case "tertiary":
       buttonClass = "bg-green-500 hover:bg-green-700 text-white";

@@ -21,7 +21,7 @@ const MainTemplate: React.FC<Props> = ({ ...props }) => {
   return (
     <>
       {/* form that has a input text field that submits to handlegetpersona */}
-      <div className="flex flex-col min-h-screen max-w-2xl mx-auto">
+      <div className="flex flex-col min-h-screen w-full max-w-2xl mx-auto">
         {" "}
         {/* added pt-16 */}
         <Navbar

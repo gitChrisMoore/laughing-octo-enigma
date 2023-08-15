@@ -77,17 +77,17 @@ const ObjectiveForm: React.FC<ObjectiveDetailsProps> = ({
               <MainContentCard header="Functional Parameters">
                 <FieldArray name="parameters">
                   {({ push, form: { values } }: FieldArrayRenderProps) => (
-                    <div>
+                    <ul className="container">
                       {values.parameters.map((item: any, index: number) => (
-                        <div className="flex flex-row" key={item.name}>
+                        <li className="container flex" key={item.name}>
                           <Field
-                            className="flex flex-row w-64 text-sm rounded-md m-1 p-2 ring-1  ring-slate-200 shadow-sm"
+                            className="flex flex-col w-full  text-sm rounded-md my-1 p-2 ring-1  ring-slate-200 shadow-sm"
                             name={`parameters.${index}.name`}
                             placeholder="Property name"
                             data-test-id={`parameters.${index}.name`}
                           />
                           <Field
-                            className="flex flex-row w-32 text-sm rounded-md m-1 p-2 ring-1  ring-slate-200 shadow-sm"
+                            className="flex flex-col text-sm rounded-md m-1 p-2 ring-1  ring-slate-200 shadow-sm"
                             as="select"
                             name={`parameters.${index}.type`}
                           >
@@ -98,17 +98,17 @@ const ObjectiveForm: React.FC<ObjectiveDetailsProps> = ({
                               </option>
                             ))}
                           </Field>
-                        </div>
+                        </li>
                       ))}
 
                       <button
                         type="button"
                         onClick={() => push({ name: "", type: "" })}
-                        className="bg-slate-500 mt-2 text-white rounded-lg flex justify-center items-center"
+                        className="bg-slate-500 mt-2 text-white rounded-lg justify-center items-center"
                       >
                         <p className="m-2 text-center text-sm">+ Field </p>
                       </button>
-                    </div>
+                    </ul>
                   )}
                 </FieldArray>
               </MainContentCard>
