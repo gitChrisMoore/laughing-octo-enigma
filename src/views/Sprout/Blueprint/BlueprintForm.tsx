@@ -207,7 +207,7 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
                   </ul>
                 </div>
               </div>
-              <div className="absolute bottom-0 left-0 w-full">
+              <div className="fixed bottom-0 left-0 w-full">
                 <div className="max-w-2xl mx-auto ">
                   <div className="mx-2">
                     <ButtonBottom

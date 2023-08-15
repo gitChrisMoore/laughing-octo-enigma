@@ -72,8 +72,8 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   }, [isNavDrawerExpanded]);
 
   return (
-    <nav className="sticky pr-2 top-0 h-14 z-20 flex justify-between content-center bg-slate-100 white ">
-      <div className="flex w-full flex-wrap items-center justify-between px-3">
+    <nav className="fixed h-12 top-0 left-0 w-full pr-2 z-10 flex items-center justify-between content-center bg-slate-100">
+      <div className="flex flex-row w-full items-center justify-between px-3">
         <div className="relative" data-te-dropdown-ref>
           <button
             onClick={toggleMenu}

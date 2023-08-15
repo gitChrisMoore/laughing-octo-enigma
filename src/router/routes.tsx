@@ -9,6 +9,7 @@ import BlueprintOverview from "../views/Sprout/Blueprint/BlueprintOverview";
 
 // Admin
 import AdminOverview from "../views/Admin/AdminOverview";
+import ObjectiveList from "../views/Sprout/Objective/ObjectiveList";
 
 export const routes = [
   ,
@@ -27,6 +28,11 @@ export const routes = [
     id: "blueprint-overview",
     component: <BlueprintOverview />,
     path: "/blueprint-overview",
+  },
+  {
+    id: "objectives-list",
+    component: <ObjectiveList />,
+    path: "/objectives-list",
   },
   {
     id: "rails-conversation",

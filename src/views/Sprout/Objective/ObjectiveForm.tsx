@@ -3,11 +3,18 @@ import { Field, FieldArray, FieldArrayRenderProps, Form, Formik } from "formik";
 import ButtonBottom from "../../../components/ButtonBottom/ButtonBottom";
 import { ObjectiveFE } from "./ObjectiveSchema";
 import { ChatMessageView } from "../Blueprint/ChatMessageView";
+import MainTemplate from "../../MainTemplate";
+import { MainContentCard } from "../../../components/MainContentCard/MainContentCard";
+import { FooterContentCard } from "../../../components/FooterContentCard/FooterContentCard";
 
 type Field = {
   name: string;
   type: string;
   description?: string;
+};
+
+export type FooterContentCardProps = {
+  children?: React.ReactNode;
 };
 
 type ObjectiveDetailsProps = {
@@ -40,10 +47,11 @@ const ObjectiveForm: React.FC<ObjectiveDetailsProps> = ({
 
   return (
     <>
-      {header()}
+      <MainTemplate>
+        {header()}
 
-      {/* Main */}
-      <div className="overflow-auto max-h-[78vh]">
+        {/* Main */}
+
         <Formik
           initialValues={item}
           onSubmit={(values) => {
@@ -51,9 +59,8 @@ const ObjectiveForm: React.FC<ObjectiveDetailsProps> = ({
           }}
         >
           {({}) => (
-            <Form className="space-y">
-              <div className="flex flex-col border-b border-slate-300">
-                <p className="py-4 text-lg font-semibold">General</p>
+            <Form>
+              <MainContentCard header="General">
                 <ChatMessageView
                   label="Name"
                   name="objective_name"
@@ -65,12 +72,9 @@ const ObjectiveForm: React.FC<ObjectiveDetailsProps> = ({
                   data-test-id="objective_description"
                   minRows={5}
                 />
-              </div>
+              </MainContentCard>
 
-              <div className="flex flex-col border-b border-slate-300">
-                <p className="py-4 text-lg font-semibold">
-                  Function Parameters
-                </p>
+              <MainContentCard header="Functional Parameters">
                 <FieldArray name="parameters">
                   {({ push, form: { values } }: FieldArrayRenderProps) => (
                     <div>
@@ -107,27 +111,24 @@ const ObjectiveForm: React.FC<ObjectiveDetailsProps> = ({
                     </div>
                   )}
                 </FieldArray>
-              </div>
-              <div className="absolute bottom-0 left-0 w-full">
-                <div className="max-w-2xl mx-auto ">
-                  <div className="mx-2">
-                    <ButtonBottom type="submit" variant="primary">
-                      Save
-                    </ButtonBottom>
-                    <ButtonBottom
-                      type="button"
-                      variant="secondary"
-                      onClick={onExitObjective}
-                    >
-                      Back
-                    </ButtonBottom>
-                  </div>
-                </div>
-              </div>
+              </MainContentCard>
+
+              <FooterContentCard>
+                <ButtonBottom type="submit" variant="primary">
+                  Save
+                </ButtonBottom>
+                <ButtonBottom
+                  type="button"
+                  variant="secondary"
+                  onClick={onExitObjective}
+                >
+                  Back
+                </ButtonBottom>
+              </FooterContentCard>
             </Form>
           )}
         </Formik>
-      </div>
+      </MainTemplate>
     </>
   );
 };

@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BlueprintView } from "./BlueprintSchema";
-import PageHeader from "../../../components/PageHeader/PageHeader";
 import TwoLineListItem from "../../../components/ListItems/TwoLineListItem";
 import useBlueprints from "./useBlueprints";
 import ButtonBottom from "../../../components/ButtonBottom/ButtonBottom";
 import BlueprintFormNew from "./BlueprintForm";
+import MainTemplate from "../../MainTemplate";
+import { MainContentCard } from "../../../components/MainContentCard/MainContentCard";
+import { FooterContentCard } from "../../../components/FooterContentCard/FooterContentCard";
 
 const BlueprintList: React.FC = () => {
   const { blueprints, isLoading, getBlueprint, updateBlueprint } =
@@ -35,6 +37,8 @@ const BlueprintList: React.FC = () => {
     }
   };
 
+  useEffect(() => {}, [blueprints]);
+
   const handleCreate = () => {
     // setSelectedItem({
     //   // id: "",
@@ -43,11 +47,6 @@ const BlueprintList: React.FC = () => {
     //   // parameters: [],
     // });
   };
-
-  const headline = "Blueprints";
-  const supportingText = `
-  These for AI are like blueprints for a building, instructing how it should  should behave. Similar to how blueprints define the structure of a building, these configs outline the specific instructions for AI interactions and conversations.
-  `;
 
   if (selectedItem) {
     return (
@@ -58,35 +57,48 @@ const BlueprintList: React.FC = () => {
       />
     );
   }
-  console.log(isLoading);
+
   return (
     <>
-      <div className="flex flex-col">
-        <PageHeader headline={headline} supportingText={supportingText} />
-        {isLoading ? (
-          <p>Loading... </p>
-        ) : (
-          <ul data-test-id="blueprint-list">
-            <p className="text-base text-med mt-2">Existing Blueprints:</p>
-            {blueprints.map((item, index) => (
-              <li
-                key={index}
-                className="py-2"
-                onClick={() => handleItemClick(item)}
+      <MainTemplate>
+        <main className="flex-grow pb-16 overflow-y-auto">
+          <MainContentCard header="Blueprints">
+            These for AI are like blueprints for a building, instructing how it
+            should should behave. Similar to how blueprints define the structure
+            of a building, these configs outline the specific instructions for
+            AI interactions and conversations.
+          </MainContentCard>
+          <div className="  flex flex-col mt-4 border-b border-slate-300">
+            {isLoading ? (
+              <p>Loading... </p>
+            ) : (
+              <ul
+                className="px-2 flex flex-col bg-white "
+                data-test-id="blueprint-list"
               >
-                <TwoLineListItem
-                  headline={item.blueprint_name}
-                  supportingText={item.blueprint_description}
-                />
-              </li>
-            ))}
-
-            <ButtonBottom onClick={handleCreate} variant="primary">
-              Create
-            </ButtonBottom>
-          </ul>
-        )}
-      </div>
+                {blueprints.map((item, index) => (
+                  <li
+                    key={index}
+                    data-test-id={`blueprint_${item.blueprint_name}`}
+                    onClick={() => handleItemClick(item)}
+                  >
+                    {/* {`blueprint_${item.blueprint_name}`} */}
+                    <TwoLineListItem
+                      headline={item.blueprint_name}
+                      supportingText={item.blueprint_description}
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </main>
+        <FooterContentCard>
+          <ButtonBottom onClick={handleCreate} variant="primary">
+            Create
+          </ButtonBottom>
+        </FooterContentCard>
+      </MainTemplate>
     </>
   );
 };

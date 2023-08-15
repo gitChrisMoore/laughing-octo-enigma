@@ -70,7 +70,7 @@ const useBlueprints = (url: string = BLUEPRINTS_URI, fetchImpl = fetch) => {
         setBlueprints(new_problem_solvers);
         // console.log(new_problem_solvers);
         setStatus("handleGetBlueprints success");
-        setIsLoading(false);
+        // setIsLoading(false);
       } else {
         setStatus(`handleGetBlueprints error, status code: ${response.status}`);
         setIsLoading(false);
