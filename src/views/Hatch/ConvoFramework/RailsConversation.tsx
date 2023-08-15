@@ -11,22 +11,20 @@ import usePostUserEvent from "./usePostUserEvent";
 import useEventSourceListener from "./useEventSourceListener";
 import MessageList from "../Message/MessageList";
 
-const CONVO_SUBMIT_API = "/api/rails_conversational/";
-const CONVO_EVENTS_API = "/api/rails_conversational/subscribe";
-
 // TODO:
 // - [ ] utilize conversation id
 // - [ ] fix the avatar on the individual messages
+
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const CONVO_EVENTS_API =
+  VITE_API_BASE_URL + "/api/rails_conversational/subscribe";
 
 const RailsConversation: React.FC = () => {
   const funcName = "rails_conversational";
   const [conversation_id] = useState(uuid());
   const [messages, setMessages] = useState<GenericMessage[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { handleSubmit } = usePostUserEvent(
-    CONVO_SUBMIT_API,
-    "GenericConvoSSE"
-  );
+  const { handleSubmit } = usePostUserEvent();
 
   const scrollToBottom = () => {
     messagesEndRef?.current?.scrollIntoView({
@@ -40,6 +38,7 @@ const RailsConversation: React.FC = () => {
     try {
       const resMessage = GenericMessageSchema.parse(JSON5.parse(event.data));
       setMessages((messages) => [...messages, resMessage]);
+
       console.log(`component: ${funcName} status: handleEvent success`);
     } catch (error) {
       console.log(`component: ${funcName} status: handleEvent error`);
@@ -72,7 +71,7 @@ const RailsConversation: React.FC = () => {
       userInput: "",
     },
     onSubmit: async (values) => {
-      await handleSubmit(values.userInput);
+      await handleSubmit(values.userInput, "GenericConvoSSE");
       formik.resetForm();
     },
   });

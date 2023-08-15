@@ -7,7 +7,8 @@ import useEventSourceListener from "./useEventSourceListener";
 import { FuncMessageSchema } from "../Models/FuncMessageSchema";
 import { Trend, TrendSchema } from "../Models/TrendEventSchema";
 
-const TYPED_EVENTS_API = "/api/rails_functional/subscribe";
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const TYPED_EVENTS_API = VITE_API_BASE_URL + "/api/rails_functional/subscribe";
 
 const AI_SOURCE_ID = "trend_bot";
 
@@ -43,7 +44,7 @@ const RailsFunctional: React.FC = () => {
 
   const { start, stop } = useEventSourceListener(
     TYPED_EVENTS_API,
-    () => console.log("SSE opened!"),
+    () => console.log("Functional SSE opened!"),
     (e) => handleEvent(e),
     (e) => console.error("Error:", e)
   );

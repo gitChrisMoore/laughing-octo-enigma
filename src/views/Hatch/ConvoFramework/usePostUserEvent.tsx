@@ -1,16 +1,19 @@
 import { useState } from "react";
 
-const usePostUserEvent = (api: string, funcName: string) => {
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const CONVO_SUBMIT_API = VITE_API_BASE_URL + "/api/rails_conversational/";
+
+const usePostUserEvent = (url: string = CONVO_SUBMIT_API) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [response, setResponse] = useState<any>(null);
 
-  const handleSubmit = async (userInput: string) => {
+  const handleSubmit = async (userInput: string, funcName: string) => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch(api, {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
