@@ -36,6 +36,10 @@ const RailsConversation: React.FC = () => {
 
   const handleEvent = (event: MessageEvent) => {
     try {
+      if (event.data && event.data.includes("'payload': None")) {
+        console.log("payload is None");
+        return;
+      }
       const resMessage = GenericMessageSchema.parse(JSON5.parse(event.data));
       setMessages((messages) => [...messages, resMessage]);
 

@@ -31,6 +31,10 @@ const RailsFunctional: React.FC = () => {
 
   const handleEvent = (event: MessageEvent) => {
     try {
+      if (event.data && event.data.includes("'payload': None")) {
+        console.log("payload is None");
+        return;
+      }
       const msg = FuncMessageSchema.parse(JSON5.parse(event.data));
       if (msg.source_id !== AI_SOURCE_ID) return;
       const resMessage = TrendSchema.parse(msg.payload);
