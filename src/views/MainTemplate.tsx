@@ -1,12 +1,16 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
+import SideSheet from "../components/SideSheet/SideSheet";
 
 interface Props {
+  navTitle: string;
   children: React.ReactNode;
+  sideSheetTitle?: string;
+  sideSheetContent?: React.ReactNode;
 }
 
 const MainTemplate: React.FC<Props> = ({ ...props }) => {
-  const { children } = props;
+  const { navTitle, children, sideSheetContent, sideSheetTitle } = props;
   const [isNavDrawerExpanded, setIsNavDrawerExpanded] = useState(false);
   const [isSideSheetOpen, setIsSideSheetOpen] = useState(false);
 
@@ -28,10 +32,21 @@ const MainTemplate: React.FC<Props> = ({ ...props }) => {
           isNavDrawerExpanded={isNavDrawerExpanded}
           toggleNavDrawer={toggleNavDrawer}
           toggleSideSheet={toggleSideSheet}
-          title="Sprout"
+          title={navTitle}
         />
         {/* <div className="container max-w-2xl mx-auto"> */}
-        <div className="flex flex-col pt-6 pb-32">{children}</div>
+        <div className="flex flex-col pt-12 pb-32">{children}</div>
+        <div>
+          {sideSheetContent && sideSheetTitle && (
+            <SideSheet
+              isExpanded={isSideSheetOpen}
+              toggleIsExpanded={toggleSideSheet}
+              title={sideSheetTitle}
+            >
+              {sideSheetContent}
+            </SideSheet>
+          )}
+        </div>
       </div>
     </>
   );

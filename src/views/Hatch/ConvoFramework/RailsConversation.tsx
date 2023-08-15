@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
-import uuid from "react-uuid";
+// import uuid from "react-uuid";
 import Button from "../../../components/Button/Button";
 import JSON5 from "json5";
 import IconSend from "../../../components/Icons/IconSend";
@@ -10,6 +10,7 @@ import { GenericMessage, GenericMessageSchema } from "../Models/GenericSchema";
 import usePostUserEvent from "./usePostUserEvent";
 import useEventSourceListener from "./useEventSourceListener";
 import MessageList from "../Message/MessageList";
+import { FooterContentCard } from "../../../components/FooterContentCard/FooterContentCard";
 
 // TODO:
 // - [ ] utilize conversation id
@@ -21,7 +22,7 @@ const CONVO_EVENTS_API =
 
 const RailsConversation: React.FC = () => {
   const funcName = "rails_conversational";
-  const [conversation_id] = useState(uuid());
+  // const [conversation_id] = useState(uuid());
   const [messages, setMessages] = useState<GenericMessage[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { handleSubmit } = usePostUserEvent();
@@ -82,37 +83,29 @@ const RailsConversation: React.FC = () => {
 
   return (
     <>
-      <div className="h-full justify-end flex flex-col ">
-        {/* top Chat */}
+      <main className="h-[calc(100vh-80px)] flex flex-col-reverse">
         <MessageList messages={messages} messagesEndRef={messagesEndRef} />
-        {/* bottom footer */}
-        <div className="sticky top-[100vh] my-2">
+
+        <FooterContentCard>
           <form onSubmit={formik.handleSubmit}>
-            <div className="flex flex-row ">
-              <div className={`flex grow`}>
-                <input
-                  className="w-full text-xs rounded-md py-2 px-2 ring-1 ring-slate-200 shadow-sm"
-                  id="userInput"
-                  name="userInput"
-                  placeholder="Type a message..."
-                  onChange={formik.handleChange}
-                  value={formik.values.userInput}
-                />
-              </div>
-              <div className="flex ml-2">
+            <div className="flex flex-row max-w-2xl mx-auto">
+              <input
+                className="flex flex-col w-full text-xs rounded-md py-2 px-2 ring-1 ring-slate-200 shadow-sm"
+                id="userInput"
+                name="userInput"
+                placeholder="Type a message..."
+                onChange={formik.handleChange}
+                value={formik.values.userInput}
+              />
+              <div className="flex flex-shrink ml-2">
                 <Button type="submit">
-                  {" "}
                   <IconSend />
                 </Button>
               </div>
             </div>
           </form>
-
-          <div className="flex py-2 items-center justify-center">
-            <p className="text-xs text-slate-400 ">{conversation_id}</p>
-          </div>
-        </div>
-      </div>
+        </FooterContentCard>
+      </main>
     </>
   );
 };

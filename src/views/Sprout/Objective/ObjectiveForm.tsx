@@ -3,7 +3,6 @@ import { Field, FieldArray, FieldArrayRenderProps, Form, Formik } from "formik";
 import ButtonBottom from "../../../components/ButtonBottom/ButtonBottom";
 import { ObjectiveFE } from "./ObjectiveSchema";
 import { ChatMessageView } from "../Blueprint/ChatMessageView";
-import MainTemplate from "../../MainTemplate";
 import { MainContentCard } from "../../../components/MainContentCard/MainContentCard";
 import { FooterContentCard } from "../../../components/FooterContentCard/FooterContentCard";
 
@@ -47,7 +46,7 @@ const ObjectiveForm: React.FC<ObjectiveDetailsProps> = ({
 
   return (
     <>
-      <MainTemplate>
+      <main className="flex-grow pb-16 overflow-y-auto">
         {header()}
 
         {/* Main */}
@@ -128,7 +127,7 @@ const ObjectiveForm: React.FC<ObjectiveDetailsProps> = ({
             </Form>
           )}
         </Formik>
-      </MainTemplate>
+      </main>
     </>
   );
 };

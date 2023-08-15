@@ -6,7 +6,6 @@ import ButtonBottom from "../../../components/ButtonBottom/ButtonBottom";
 import { ChatMessageView } from "./ChatMessageView";
 import { IconPlusCircle } from "../../../components/Icons/IconPlusCircle";
 import { FooterContentCard } from "../../../components/FooterContentCard/FooterContentCard";
-import MainTemplate from "../../MainTemplate";
 import { MainContentCard } from "../../../components/MainContentCard/MainContentCard";
 
 type BlueprintFormProps = {
@@ -47,7 +46,7 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
 
   return (
     <>
-      <MainTemplate>
+      <main className="flex-grow pb-16 overflow-y-auto">
         {header()}
 
         <Formik
@@ -150,13 +149,13 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
               {/* Objectives */}
               <MainContentCard header="Objectives">
                 <ul
-                  className="px-2 flex flex-col border-b border-slate-300 overflow-y-auto max-h-[40vh]"
+                  className="container bg-white overflow-y-auto max-h-[40vh]"
                   data-test-id="objective_list"
                 >
                   {objectives?.map((objective) => (
                     <li
                       key={objective.objective_id}
-                      className="container bg-white px-2 py-3"
+                      className=""
                       onClick={() => {
                         const currentValue =
                           values.objectives?.[objective.objective_id] ?? false;
@@ -211,7 +210,7 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
             </Form>
           )}
         </Formik>
-      </MainTemplate>
+      </main>
     </>
   );
 };

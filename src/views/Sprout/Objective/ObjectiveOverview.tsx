@@ -4,7 +4,7 @@ import ObjectiveList from "./ObjectiveList";
 const ObjectiveOverview: React.FC = () => {
   return (
     <>
-      <MainTemplate>
+      <MainTemplate navTitle={"Sprout"}>
         <ObjectiveList />
       </MainTemplate>
     </>

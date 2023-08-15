@@ -4,7 +4,7 @@ import BlueprintList from "./BlueprintList";
 const BlueprintOverview: React.FC = () => {
   return (
     <>
-      <MainTemplate>
+      <MainTemplate navTitle="Sprout">
         <BlueprintList />
       </MainTemplate>
     </>

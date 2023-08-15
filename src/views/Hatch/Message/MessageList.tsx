@@ -10,7 +10,7 @@ const MessageList: React.FC<MessageListProps> = ({
   messages,
   messagesEndRef,
 }) => (
-  <div className="flex flex-col big-white overflow-auto py-2">
+  <div>
     {messages.map((message, index) => (
       <Message key={index} message={message} />
     ))}
