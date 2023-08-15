@@ -58,13 +58,13 @@ const BlueprintList: React.FC = () => {
       />
     );
   }
-
+  console.log(isLoading);
   return (
     <>
       <div className="flex flex-col">
         <PageHeader headline={headline} supportingText={supportingText} />
-        {isLoading && <p>Loading...</p> ? (
-          <p>Loading...</p>
+        {isLoading ? (
+          <p>Loading... </p>
         ) : (
           <ul data-test-id="blueprint-list">
             <p className="text-base text-med mt-2">Existing Blueprints:</p>

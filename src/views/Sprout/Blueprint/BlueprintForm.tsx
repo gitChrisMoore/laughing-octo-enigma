@@ -220,9 +220,7 @@ const BlueprintForm: React.FC<BlueprintFormProps> = ({
                     <ButtonBottom
                       type="button"
                       variant="secondary"
-                      onClick={() => {
-                        onExit();
-                      }}
+                      onClick={onExit}
                     >
                       Back
                     </ButtonBottom>

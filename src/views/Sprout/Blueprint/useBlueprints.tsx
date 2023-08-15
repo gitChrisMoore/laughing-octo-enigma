@@ -32,6 +32,7 @@ const useBlueprints = (url: string = BLUEPRINTS_URI, fetchImpl = fetch) => {
         const blueprintAPI = BlueprintModelSchema.parse(res);
         const blueprintView = parseToBlueprintView(blueprintAPI);
         setStatus("handleGetProblemSolver success");
+        setIsLoading(false);
         return blueprintView;
       } else {
         setStatus(
@@ -46,7 +47,6 @@ const useBlueprints = (url: string = BLUEPRINTS_URI, fetchImpl = fetch) => {
   };
 
   const handleGetBlueprints = async () => {
-    console.log(url);
     setIsLoading(true);
     try {
       const response = await fetchImpl(url, {
@@ -70,8 +70,10 @@ const useBlueprints = (url: string = BLUEPRINTS_URI, fetchImpl = fetch) => {
         setBlueprints(new_problem_solvers);
         // console.log(new_problem_solvers);
         setStatus("handleGetBlueprints success");
+        setIsLoading(false);
       } else {
         setStatus(`handleGetBlueprints error, status code: ${response.status}`);
+        setIsLoading(false);
       }
     } catch (error) {
       setStatus("handleGetBlueprints error");
