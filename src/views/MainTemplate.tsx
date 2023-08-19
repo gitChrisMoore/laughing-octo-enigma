@@ -35,7 +35,7 @@ const MainTemplate: React.FC<Props> = ({ ...props }) => {
           title={navTitle}
         />
         {/* <div className="container max-w-2xl mx-auto"> */}
-        <div className="h-[calc(100dvh-48px)] bg-blue-600 pt-12 flex flex-col">
+        <div className="h-[calc(100dvh-48px)] pt-12 flex flex-col">
           {children}
         </div>
         <div>

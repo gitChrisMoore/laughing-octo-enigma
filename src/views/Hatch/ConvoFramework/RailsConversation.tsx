@@ -83,7 +83,7 @@ const RailsConversation: React.FC = () => {
 
   return (
     <>
-      <main className=" bg-red-500 flex flex-grow flex-col-reverse overflow-y-auto">
+      <main className="flex flex-grow flex-col-reverse overflow-y-auto">
         <MessageList messages={messages} messagesEndRef={messagesEndRef} />
 
         <FooterContentCard>
