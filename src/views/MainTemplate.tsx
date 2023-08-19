@@ -25,7 +25,7 @@ const MainTemplate: React.FC<Props> = ({ ...props }) => {
   return (
     <>
       {/* form that has a input text field that submits to handlegetpersona */}
-      <div className="flex flex-col min-h-screen w-full max-w-2xl mx-auto">
+      <div className="flex flex-col w-full max-w-2xl mx-auto">
         {" "}
         {/* added pt-16 */}
         <Navbar
@@ -35,7 +35,9 @@ const MainTemplate: React.FC<Props> = ({ ...props }) => {
           title={navTitle}
         />
         {/* <div className="container max-w-2xl mx-auto"> */}
-        <div className="flex flex-col pt-12 pb-32">{children}</div>
+        <div className="h-[calc(100dvh-48px)] bg-blue-600 pt-12 flex flex-col">
+          {children}
+        </div>
         <div>
           {sideSheetContent && sideSheetTitle && (
             <SideSheet
